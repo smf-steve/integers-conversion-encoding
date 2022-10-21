@@ -1,0 +1,35 @@
+div.out{
+	height: 40px;
+	width:  300px;
+	border: 1px solid black;
+}
+div.in{
+	height: 40px;
+	width:  620px;
+	border: 1px solid black;
+}
+
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: 5px solid #FFFF00;
+	padding: 10px;
+}
+
+div#first{
+	background-color: #D8D8D8;
+	margin: 10px;
+	align-items: left;
+	position:  relative;
+	left: 100px;
+	top: 40px;
+}
+div#second{
+	background-color: #D8D8D8;
+	margin: 10px;
+	float:  left;
+	position:  relative;
+	left: 100px;
+}
