@@ -51,8 +51,37 @@ div#bt{
 }
 
 div.rightbox{
+	height: 300px;
+	width:  520px;
+	border: 2px solid grey;
+	background-color: #D8D8D8;
+	margin: 10px;
+	align-items: ;
+	position:  relative;
+	left: 719px;
+	top: 120px;
+}
+
+div.na{
+	hight:  ;
+	position: relative; 
+	left: 719px; 
+	top: 120px;
+}
+
+div.out2{
+	height: 50px;
+	width:  200px;
+	border: 1px solid black;
+	background-color: #D8D8D8;
+	margin: 20px;
+	float:  left;
+	position:  relative;
+	left: 10px;
+	bottom:  490px;
 
 }
+
 
 .center {
 	position: absolute;
