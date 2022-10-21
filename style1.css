@@ -1,12 +1,57 @@
-div.out{
-	height: 40px;
-	width:  300px;
-	border: 1px solid black;
-}
 div.in{
 	height: 40px;
-	width:  620px;
+	width:  520px;
 	border: 1px solid black;
+	background-color: #D8D8D8;
+	margin: 10px;
+	align-items: left;
+	position:  relative;
+	left: 175px;
+	top: 10px;
+}
+div.out{
+	height: 40px;
+	width:  250px;
+	border: 1px solid black;
+	background-color: #D8D8D8;
+	margin: 10px;
+	float:  left;
+	position:  relative;
+	left: 175px;
+	top:  10px;
+}
+
+div.leftbox{
+	height: 500px;
+	width:  505px;
+	border: 10px solid grey;
+	background-color: #D8D8D8;
+	margin: 10px;
+	float:  left;
+	position:  relative;
+	left: 175px;
+	top: 10px;
+}
+div.littlebox{
+	border: 3px solid black;
+	background-color: white;
+	margin: 10px;
+	position:  relative;
+	top: 5px;
+	left:  3px;
+}
+
+div#tp{
+	height: 150px;
+	width:  475px;
+}
+div#bt{
+	height: 300px;
+	width:  475px;
+}
+
+div.rightbox{
+
 }
 
 .center {
@@ -16,20 +61,4 @@ div.in{
 	transform: translate(-50%, -50%);
 	border: 5px solid #FFFF00;
 	padding: 10px;
-}
-
-div#first{
-	background-color: #D8D8D8;
-	margin: 10px;
-	align-items: left;
-	position:  relative;
-	left: 100px;
-	top: 40px;
-}
-div#second{
-	background-color: #D8D8D8;
-	margin: 10px;
-	float:  left;
-	position:  relative;
-	left: 100px;
 }
