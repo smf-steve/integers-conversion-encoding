@@ -1,93 +1,206 @@
-div.in{
-	height: 40px;
-	width:  520px;
-	border: 1px solid black;
-	background-color: #D8D8D8;
-	margin: 10px;
-	align-items: left;
-	position:  relative;
-	left: 175px;
-	top: 10px;
-}
-div.out{
-	height: 40px;
-	width:  250px;
-	border: 1px solid black;
-	background-color: #D8D8D8;
-	margin: 10px;
-	float:  left;
-	position:  relative;
-	left: 175px;
-	top:  10px;
+body {
+    background-color: rgb(233, 233, 233);
 }
 
-div.leftbox{
-	height: 500px;
-	width:  505px;
-	border: 10px solid grey;
-	background-color: #D8D8D8;
-	margin: 10px;
-	float:  left;
-	position:  relative;
-	left: 175px;
-	top: 10px;
-}
-div.littlebox{
-	border: 3px solid black;
-	background-color: white;
-	margin: 10px;
-	position:  relative;
-	top: 5px;
-	left:  3px;
-}
-
-div#tp{
-	height: 150px;
-	width:  475px;
-}
-div#bt{
-	height: 300px;
-	width:  475px;
-}
-
-div.rightbox{
-	height: 300px;
-	width:  520px;
-	border: 2px solid grey;
-	background-color: #D8D8D8;
-	margin: 10px;
-	align-items: ;
-	position:  relative;
-	left: 719px;
-	top: 120px;
-}
-
-div.na{
-	hight:  ;
-	position: relative; 
-	left: 719px; 
-	top: 120px;
-}
-
-div.out2{
-	height: 50px;
-	width:  200px;
-	border: 1px solid black;
-	background-color: #D8D8D8;
-	margin: 20px;
-	float:  left;
-	position:  relative;
-	left: 10px;
-	bottom:  490px;
-
-}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 
 
-.center {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	border: 5px solid #FFFF00;
-	padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.input {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+}
+
+.input div {
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #adadad;
+
+    padding: 15px;
+    margin-top: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+
+    background-color: #FFFFFF;
+
+    font-weight: bold;
+}
+
+.input input {
+    border: none;
+    font-size: inherit;
+    
+    background-color: inherit;
+}
+
+.input input:focus {
+    outline: none;
+}
+
+.conversions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.conversions p {
+    display: flex;
+
+    background-color: transparent;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #000000;
+
+    padding: 15px;
+    margin-top: 45px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    width: 200px;
+}
+
+.outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: left;
+    flex-wrap: wrap;
+
+    outline: none;
+
+    margin-top: 25px;
+
+    padding: 15px;
+}
+
+.inner {
+    display: grid; 
+    
+    font-weight: bold;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+
+    padding: 15px;
+
+    width: 500px;
+    height: 500px;
+
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.inner div {
+    display: inline;
+    text-align: left;
+
+    background-color: #FFFFFF;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #adadad;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    padding: 15px;
+
+    width: 93%;
+    
+}
+
+.inner div p {
+    font-weight: lighter;
+}
+
+.inner div input {
+    float: right;
+
+    font-weight: bold;
+    color: dodgerblue;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: dodgerblue;
+    
+    padding: 15px;
+
+    background-color: #ffffff
+}
+
+.inner div input:active{
+    float: right;
+
+    border-radius: 5px;
+
+    background-color: #adadad;
+}
+
+.dtob {
+    height: 140px;
+}
+
+.btod {
+    height: 270px;
+}
+
+.inner2 {
+    display: grid; 
+    grid-template-columns: auto auto;
+    justify-content: center;
+    
+    font-weight: bold;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+
+    padding: 10px;
+
+    width: 500px;
+    height: 400px;
+
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.inner2 div p {
+    display: flex;
+
+    background-color: #FFFFFF;
+    font-weight: lighter;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #adadad;
+
+    margin-left: 25px;
+    margin-right: 25px;
+
+    padding: 15px;
+
+    width: 150px;
+}
+
+.encodings{
+    text-align: left;
+    margin-left: -86px;
 }
