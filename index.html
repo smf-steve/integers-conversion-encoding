@@ -1,117 +1,89 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
+        <title> Integer Conversion Encoding </title>
+
 		<meta name="description" content="An academic tool used to Convert and Encode Integers (of various bases).">
 		<meta name="author" content="Victoria Miteva">
 		<meta name="keywords" content="convert, encode, integers, binary">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title> Integer Conversion Encoding </title>
 		<link href="style1.css" rel="stylesheet" type="text/css"/>
 	</head>
 
-	<body style="background-color: #BFBFBF;">
-		<h2> <center>Integer Conversion Encoding </center></h2>
+    <body>
+        <div class="container">
+            <div> 
+                <div class="header">
+                    <h1> Integer Conversion Encoding </h1>
+                </div>
 
-		<header>
-			<nav>
-			</nav>
-		</header>
-		
-		<main>
+                <div class="input">
+                    <div>
+                        <label>
+                            Input a number: 
+                            <input type="text" placeholder="#2 1010 1011">
+                        </label>
+                    </div>
+                </div>
 
-			<div class="in">
-				<center>
-					<span> Input a number: </span> <input type="text" value="2# - 1010 1011">
-				</center>
-			</div>
+                <div class="conversions">
+                    <div>
+                        <p> #2 - 1010 1011 </p>
+                    </div>
+                    <div>
+                        <p> 8# - 253 </p>
+                    </div>
+                    <div>
+                        <p> 10# - 171 </p>
+                    </div>
+                    <div>
+                        <p> 16# - AB </p>
+                    </div>
+                </div>
 
-			
-			<div class="out"> <center>2# - OUTPUT PLACEHOLDER</center></div>
-			<div class="out"> <center>8# - OUTPUT PLACEHOLDER</center></div>
-			<div class="out"> <center>10# - OUTPUT PLACEHOLDER</center></div>
-			<div class="out"> <center>16# - OUTPUT PLACEHOLDER</center></div>
+                <div class="outer">
+                    <div class="inner">
+                        <div class="dtob">
+                            Decimal to Binary Conversion
+                            <input type="button" value="Step/Replay" >
+                            <p> v-- Conversion Below --v</p>
+                        </div>
+                        <div class="btod">
+                            Binary to Decimal Conversion
+                            <input type="button" value="Step/Replay" >
+                            <p> v-- Conversion Below --v</p>
+                        </div>
+                    </div>
 
-			<br></br>
-
-			<div class="leftbox"> 
-					<div class="littlebox" id="tp">
-						Decimal to Binary Conversion
-						<input type="button" value="Step/Replay" style="float: right; margin: 5px;">
-					</div>
-
-					<div class="littlebox" id="bt">
-						Base to Decimal Conversion
-						<input type="button" value="Step/Replay" style="float: right; margin: 5px;">
-					</div>
-			</div>
-
-			<h3 style="position: relative; top: 135px; right: 170px;"> 32-Bit Encodings </h3>
-
-			<div class="rightbox"> 
-				<div class="out2"><span style="margin: 5px">Unsigned int</span></div>
-				<div class="out2"><span style="margin: 5px">Hex</span></div>
-			    <div class="out2"><span style="margin: 5px">2's Complement</span></div>
-				<div class="out2"><span style="margin: 5px">ASCII</span></div>
-				<div class="out2"><span style="margin: 5px">1's Complement</span></div>
-				<div class="out2"><span style="margin: 5px">Base64</span></div>
-		
-			</div>
-
-		</main>
-	
-
-		<footer>
-		</footer>
-
-		<!-- Ignore this comment-->
-		
-		<!-- Ignore this comment
-
-		<br></br> (line break)
-		<hr/> (horizontal line)
-		COLOR: (text and text background)
-			<p style="color: grey; background-color: grey;">Style</p>
-		<main>
-			<article>
-				<section>
-					<h3></h3>
-					<aside>
-					</aside>
-				</section>
-			</article>
-
-
-			<table class="styled">
-				<caption> List </caption>
-				<thead>
-					<tr>
-						<th>col1</th>
-						<th>col2</th>
-						<th>col3</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>one</td>
-						<td>one</td>
-						<td>one</td>
-					</tr>
-					<tr>
-						<td>one</td>
-						<td>one</td>
-						<td>one</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</main>
-
-
-		-->
-
-	</body>
-
+                    <div class="inner2">
+                        <div>
+                            <h1> </h1>
+                        </div>
+                        <div>
+                            <h2 class="encodings"> 32-bit Encodings </h2>
+                        </div>
+                        <div>
+                            <p> Unsigned Int </p>
+                        </div>
+                        <div>
+                            <p> Hex </p>
+                        </div>
+                        <div>
+                            <p> 2s Complement </p>
+                        </div>
+                        <div>
+                            <p> ASCII </p>
+                        </div>
+                        <div>
+                            <p> 1s Compliment </p>
+                        </div>
+                        <div>
+                            <p> Base-64 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
