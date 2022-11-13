@@ -98,9 +98,22 @@
         <div class="container bg-light section">  
             <div>
                 <div>
-                    <form class="form-floating input">
-                        <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="2# 1010 1011">
-                        <label for="floatingInputVal">Input a number</label>
+                    <form class="input">
+                        <div class="input-group">
+                        <div class="dropdown input-group-prepend">
+                            <a class="btn btn-outline-dark mt-3 btn-sm dropdown-toggle rounded-start" href="#" role="button" data-bs-toggle="dropdown" value="2#" aria-expanded="false">2#</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item">2#</a></li>
+                                <li><a class="dropdown-item">8#</a></li>
+                                <li><a class="dropdown-item">10#</a></li>
+                                <li><a class="dropdown-item">16#</a></li>
+                            </ul>
+                        </div>                       
+                        <div class="form-floating mb-3 mt-3 ml-auto gx-1">
+                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="1010 1011">
+                            <label for="floatingInputVal">Input a number</label>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
