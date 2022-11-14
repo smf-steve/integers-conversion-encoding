@@ -110,7 +110,7 @@
                             </ul>
                         </div>                       
                         <div class="form-floating mb-3 mt-3 ml-auto gx-1">
-                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="1010 1011">
+                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="1010 1011" onchange="convert()">
                             <label for="floatingInputVal">Input a number</label>
                         </div>
                     </div>
@@ -244,6 +244,36 @@
             </div>
         </div>
         </section>
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>             
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
+
+        <script>
+        function convert() {
+            var rawVal = document.getElementById("floatingInputVal").value;
+            var convertFrom = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1));
+            var numFrom = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1),);
+            numFrom = numFrom.replace(/ /g, "");
+            switch (convertFrom) {
+                case "2#":
+                    var decVal = parseInt(numFrom, 2);
+                    break;
+                case "8#":
+                case "0o":
+                    var decVal = parseInt(numFrom, 8);
+                    break;
+                case "10#":
+                    var decVal = parseInt(numFrom, 10);
+                    break;
+                case "16#":
+                case "0x":
+                    var decVal = parseInt(numFrom, 16);
+                    break;
+            }
+            document.getElementById("floatingBase").value = decVal.toString(2);
+            document.getElementById("floatingBaseTen").value = decVal;
+            document.getElementById("floatingBaseEight").value = decVal.toString(8);
+            document.getElementById("floatingBaseS").value = decVal.toString(16);
+
+        }
+        </script>             
     </body>
 </html>
