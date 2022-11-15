@@ -5,25 +5,42 @@ function convert() {
     num = num.replace(/ /g, "");
     switch (base) {
         case "2#":
-            var decVal = parseInt(num, 2);
+            if (isBinary(num)) {
+                var decVal = parseInt(num, 2);
+                validInput(decVal);
+            }
+            else invalidInput();
             break;
         case "8#":
         case "0o":
-            var decVal = parseInt(num, 8);
-            break;
-        case "10#":
-            var decVal = parseInt(num, 10);
+            if (isOctal(num)) {
+                var decVal = parseInt(num, 8);
+                validInput(decVal);
+            }
+            else invalidInput();
             break;
         case "16#":
         case "0x":
             var decVal = parseInt(num, 16);
+            validInput(decVal);
+            break;
+        case "10#":
+        default:
+            var decVal = parseInt(num, 10);
+            if (Number.isInteger(decVal)) {
+                validInput(decVal);
+            }
+            else invalidInput();
             break;
     }
-    document.getElementById("floatingBase").value = decVal.toString(2);
-    document.getElementById("floatingBaseTen").value = decVal;
-    document.getElementById("floatingBaseEight").value = decVal.toString(8);
-    document.getElementById("floatingBaseS").value = decVal.toString(16);
+}    
+function validInput(decimalVal) {
+    document.getElementById("floatingBase").value = decimalVal.toString(2);
+    document.getElementById("floatingBaseTen").value = decimalVal;
+    document.getElementById("floatingBaseEight").value = decimalVal.toString(8);
+    document.getElementById("floatingBaseS").value = decimalVal.toString(16);   
 }
+<<<<<<< HEAD
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
         if(dec[i] != 0 && dec[i] != 1)
@@ -32,3 +49,25 @@ function isBinary(dec){
     return true;
 }
                  
+function invalidInput() {
+    document.getElementById("floatingBase").value = "invalid number";
+    document.getElementById("floatingBaseEight").value = "invalid number";
+    document.getElementById("floatingBaseTen").value = "invalid number";
+    document.getElementById("floatingBaseS").value = "invalid number";
+}
+function isBinary(dec) {
+    for (let i = 0; i < dec.length; i++) {
+        if (dec[i] != 0 && dec[i] != 1) {
+            return false; 
+        }
+    }
+    return true;
+}
+function isOctal(dec) {
+      for (let i = 0; i < dec.length; i++) {
+        if (dec[i] > 7 || isNaN(dec[i])){
+          return false;
+        }
+      }
+      return true;
+  }                 
