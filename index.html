@@ -62,34 +62,6 @@
             });
         
         });
-        function convert() {
-            var rawVal = document.getElementById("floatingInputVal").value;
-            var convertFrom = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1));
-            var numFrom = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1),);
-            numFrom = numFrom.replace(/ /g, "");
-            switch (convertFrom) {
-                case "2#":
-                    var decVal = parseInt(numFrom, 2);
-                    break;
-                case "8#":
-                case "0o":
-                    var decVal = parseInt(numFrom, 8);
-                    alert(decVal);
-                    break;
-                case "10#":
-                    var decVal = parseInt(numFrom, 10);
-                    break;
-                case "16#":
-                case "0x":
-                    var decVal = parseInt(numFrom, 16);
-                    break;
-            }
-            document.getElementById("floatingBase").value = decVal.toString(2);
-            document.getElementById("floatingBaseTen").value = decVal;
-            document.getElementById("floatingBaseEight").value = decVal.toString(8);
-            document.getElementById("floatingBaseS").value = decVal.toString(16);
-
-        }
         </script>        
 	</head>
     <body class="bg-light" id="page-top">
@@ -272,5 +244,8 @@
         </div>
         </section>
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
+
+        <script src="index.js"></script>
+        
     </body>
 </html>
