@@ -5,6 +5,7 @@ function convert() {
     num = num.replace(/ /g, "");
     switch (base) {
         case "2#":
+        case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
                 validInput(decVal);
@@ -21,8 +22,11 @@ function convert() {
             break;
         case "16#":
         case "0x":
-            var decVal = parseInt(num, 16);
-            validInput(decVal);
+            if (isHex(num)) {
+                var decVal = parseInt(num, 16);
+                validInput(decVal);
+            }
+            else invalidInput();
             break;
         case "10#":
         default:
@@ -61,4 +65,11 @@ function isOctal(dec) {
         }
       }
       return true;
-  }                 
+}       
+function isHex(dec) {
+    var check = /[a-fA-F0-9]/g;
+    if (dec.match(check)) {
+        return true;
+    }
+    else return false;
+}
