@@ -24,4 +24,11 @@ function convert() {
     document.getElementById("floatingBaseEight").value = decVal.toString(8);
     document.getElementById("floatingBaseS").value = decVal.toString(16);
 }
+function isBinary(dec){
+    for(let i = 0; i < dec.length; i++){
+        if(dec[i] != 0 && dec[i] != 1)
+            return false;
+    }
+    return true;
+}
                  
