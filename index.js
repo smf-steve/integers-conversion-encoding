@@ -40,7 +40,6 @@ function validInput(decimalVal) {
     document.getElementById("floatingBaseEight").value = decimalVal.toString(8);
     document.getElementById("floatingBaseS").value = decimalVal.toString(16);   
 }
-<<<<<<< HEAD
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
         if(dec[i] != 0 && dec[i] != 1)
