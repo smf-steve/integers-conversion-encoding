@@ -1,10 +1,11 @@
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
-    var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1));
-    var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1),);
+    var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
+    var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1) || rawVal.indexOf("b") + 1,);
     num = num.replace(/ /g, "");
     switch (base) {
         case "2#":
+        case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
                 validInput(decVal);
@@ -21,8 +22,11 @@ function convert() {
             break;
         case "16#":
         case "0x":
-            var decVal = parseInt(num, 16);
-            validInput(decVal);
+            if (isHex(num)) {
+                var decVal = parseInt(num, 16);
+                validInput(decVal);
+            }
+            else invalidInput();
             break;
         case "10#":
         default:
@@ -54,19 +58,28 @@ function invalidInput() {
     document.getElementById("floatingBaseTen").value = "invalid number";
     document.getElementById("floatingBaseS").value = "invalid number";
 }
-function isBinary(dec) {
-    for (let i = 0; i < dec.length; i++) {
-        if (dec[i] != 0 && dec[i] != 1) {
+function isBinary(numVal) {
+    for (let i = 0; i < numVal.length; i++) {
+        if (numVal[i] != 0 && numVal[i] != 1) {
             return false; 
         }
     }
     return true;
 }
-function isOctal(dec) {
-      for (let i = 0; i < dec.length; i++) {
-        if (dec[i] > 7 || isNaN(dec[i])){
+function isOctal(numVal) {
+      for (let i = 0; i < numVal.length; i++) {
+        if (numVal[i] > 7 || isNaN(numVal[i])){
           return false;
         }
       }
       return true;
   }                 
+
+       
+function isHex(numVal) {
+    var check = /[a-fA-F0-9]/g;
+    if (numVal.match(check)) {
+        return true;
+    }
+    else return false;
+}
