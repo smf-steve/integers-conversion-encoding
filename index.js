@@ -1,7 +1,3 @@
-// $(document).on("keydown", ":input:not(textarea)", function(event) {
-//     return event.key != "Enter";
-// });
-
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
