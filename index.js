@@ -41,10 +41,10 @@ function convert() {
 }   
 
 function validInput(decimalVal) {
-    document.getElementById("floatingBase").value = decimalVal.toString(2);
-    document.getElementById("floatingBaseTen").value = decimalVal;
-    document.getElementById("floatingBaseEight").value = decimalVal.toString(8);
-    document.getElementById("floatingBaseS").value = decimalVal.toString(16); 
+    document.getElementById("floatingBase").value = "2# " + decimalVal.toString(2);
+    document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
+    document.getElementById("floatingBaseEight").value = "8# 0o" + decimalVal.toString(8);
+    document.getElementById("floatingBaseS").value = "#16 0x" + decimalVal.toString(16); 
 }
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
