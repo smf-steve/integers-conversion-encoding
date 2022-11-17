@@ -45,7 +45,13 @@ function validInput(decimalVal) {
     document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
     document.getElementById("floatingBaseEight").value = "8# " + decimalVal.toString(8);
     document.getElementById("floatingBaseS").value = "16# " + decimalVal.toString(16);   
-}
+
+
+    document.getElementById("floatingBase").value = format2_16(decimalVal.toString(2));
+    document.getElementById("floatingBaseTen").value = decimalVal;
+    document.getElementById("floatingBaseEight").value = format8(decimalVal.toString(8));
+    document.getElementById("floatingBaseS").value = format2_16(decimalVal.toString(16));   
+}                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
     var str = '';
@@ -54,7 +60,6 @@ function ascii(decimalVal){
     }
     return str;
 }
-
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
         if(dec[i] != 0 && dec[i] != 1)
@@ -62,7 +67,6 @@ function isBinary(dec){
     }
     return true;
 }
-                 
 function invalidInput() {
     document.getElementById("floatingBase").value = "invalid number";
     document.getElementById("floatingBaseEight").value = "invalid number";
@@ -84,9 +88,7 @@ function isOctal(numVal) {
         }
       }
       return true;
-  }                 
-
-       
+}                  
 function isHex(numVal) {
     var check = /[a-fA-F0-9]/g;
     if (numVal.match(check)) {
@@ -94,3 +96,17 @@ function isHex(numVal) {
     }
     else return false;
 }
+function format2_16(strBase2) {
+    var formattedStr = "";
+    var formattedStr = strBase2.match(/.{1,4}/g);
+    formattedStr = formattedStr.join(' ');
+    var upperCase = formattedStr.toUpperCase();
+    return upperCase;
+}
+function format8(strBase8) {
+    var formattedStr = "";
+    var formattedStr = strBase8.match(/.{1,3}/g);
+    formattedStr = formattedStr.join(' ');
+    return formattedStr;
+}
+
