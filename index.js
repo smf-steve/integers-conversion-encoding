@@ -41,13 +41,24 @@ function convert() {
             else invalidInput();
             break;
     }
-}    
+    document.getElementById("ascii").value = ascii(decVal);
+}   
+
 function validInput(decimalVal) {
     document.getElementById("floatingBase").value = "2# " + decimalVal.toString(2);
     document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
     document.getElementById("floatingBaseEight").value = "8# " + decimalVal.toString(8);
     document.getElementById("floatingBaseS").value = "16# " + decimalVal.toString(16);   
 }
+function ascii(decimalVal){
+    var hex = decimalVal.toString(16);
+    var str = '';
+    for (var n = 0; n < hex.length; n+=2){
+        str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
+    }
+    return str;
+}
+
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
         if(dec[i] != 0 && dec[i] != 1)
