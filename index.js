@@ -1,6 +1,7 @@
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
+    setNeg(rawVal);
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1) || rawVal.indexOf("b") + 1,);
     num = num.replace(/ /g, "");
     switch (base) {
@@ -37,7 +38,13 @@ function convert() {
             else invalidInput();
             break;
     }
-    document.getElementById("ascii").value = ascii(decVal);
+    if (isASCII(num)) {
+        var decVal = parseInt(num, 16);
+        if (Number.isInteger(decVal)) {
+            validInput(decVal);
+        }
+    } else invalidInput();
+
 }   
 
 function validInput(decimalVal) {
@@ -45,8 +52,11 @@ function validInput(decimalVal) {
     document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
     document.getElementById("floatingBaseEight").value = "8# 0o" + format8(decimalVal.toString(8));
     document.getElementById("floatingBaseS").value = "#16 0x" +format2_16(decimalVal.toString(16));   
-}    
-             
+
+        
+    document.getElementById("ascii").value = ascii(decimalVal);
+  
+}                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
     var str = '';
@@ -67,6 +77,8 @@ function invalidInput() {
     document.getElementById("floatingBaseEight").value = "invalid number";
     document.getElementById("floatingBaseTen").value = "invalid number";
     document.getElementById("floatingBaseS").value = "invalid number";
+
+    document.getElementById("ascii").value = "invalid number";
 }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
@@ -91,6 +103,13 @@ function isHex(numVal) {
     }
     else return false;
 }
+// function isASCII(numVal){
+//     var range = /[\x00-\x7F]/g;
+//     if (numVal.match(range)){
+//         return true;
+//     }
+//     else return false;
+// }
 function format2_16(strBase2) {
     var formattedStr = "";
     var formattedStr = strBase2.match(/.{1,4}/g);
@@ -103,5 +122,13 @@ function format8(strBase8) {
     var formattedStr = strBase8.match(/.{1,3}/g);
     formattedStr = formattedStr.join(' ');
     return formattedStr;
+}
+
+function setNeg(rawVal){
+    var sign = false;
+    if (rawVal.indexOf('-') > -1)
+    {
+      sign = true;
+    }
 }
 
