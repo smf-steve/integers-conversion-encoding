@@ -1,3 +1,7 @@
+// $(document).on("keydown", ":input:not(textarea)", function(event) {
+//     return event.key != "Enter";
+// });
+
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
@@ -39,10 +43,10 @@ function convert() {
     }
 }    
 function validInput(decimalVal) {
-    document.getElementById("floatingBase").value = decimalVal.toString(2);
-    document.getElementById("floatingBaseTen").value = decimalVal;
-    document.getElementById("floatingBaseEight").value = decimalVal.toString(8);
-    document.getElementById("floatingBaseS").value = decimalVal.toString(16);   
+    document.getElementById("floatingBase").value = "2# " + decimalVal.toString(2);
+    document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
+    document.getElementById("floatingBaseEight").value = "8# " + decimalVal.toString(8);
+    document.getElementById("floatingBaseS").value = "16# " + decimalVal.toString(16);   
 }
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){

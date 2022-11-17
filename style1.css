@@ -1,15 +1,13 @@
-/*.container {
-    text-align: center;
- THIS Text-align is what is putting class box text in center 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-}*/
+.container {
+   /* text-align: center;
+ THIS Text-align is what is putting class box text in center*/ 
+    font-family: 'Seven Segment', sans-serif;
+   font-size: 16px;
+}
 
 .input {
     margin-left: 30%;
     margin-right: 30%;
-    display: flex;
-    justify-content: center;
     text-align: center;  
 }
 

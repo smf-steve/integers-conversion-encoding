@@ -8,7 +8,12 @@
 		<meta name="author" content="Victoria Miteva, and others">
 		<meta name="keywords" content="convert, encode, integers, binary">
 		<link href="style1.css" rel="stylesheet" type="text/css"/>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+        <!-- 7-segement display -->
+        <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
+                
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />       
@@ -97,22 +102,11 @@
         <div class="container bg-light section">  
             <div>
                 <div>
-                    <form class="input">
-                        <div class="input-group">
-                        <div class="dropdown input-group-prepend">
-                            <a class="btn btn-outline-dark mt-3 btn-sm dropdown-toggle rounded-start" href="#" role="button" data-bs-toggle="dropdown" value="2#" aria-expanded="false">2#</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item">2#</a></li>
-                                <li><a class="dropdown-item">8#</a></li>
-                                <li><a class="dropdown-item">10#</a></li>
-                                <li><a class="dropdown-item">16#</a></li>
-                            </ul>
-                        </div>                       
+                    <form class="input" action="#">
                         <div class="form-floating mb-3 mt-3 ml-auto gx-1">
-                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="1010 1011" oninput="convert()">
+                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="1010 1011" onchange="convert()">
                             <label for="floatingInputVal">Input a number</label>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -121,28 +115,28 @@
                 <div class="row justify-content-around">
                     <div class="col">
                         <form class="form-floating">             
-                            <input class="form-control" type="text" id="floatingBase" value="2# - 1010 1011" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBase">Base 2 (2#)</label>  
+                            <input class="form-control" type="text" id="floatingBase" value="2# 1010 1011" aria-label="Disabled input example" disabled readonly>
+                            <label for="floatingBase">Base 2 (Binary)</label>  
                         </form>
                     </div>
 
                     <div class="col">
                         <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="8# - 253" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">Base 8 (8#)</label>           </form>
+                            <input class="form-control" id="floatingBaseEight" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
+                            <label for="floatingBaseEight">Base 8 (Octal)</label>           </form>
                     </div>
 
                     <div class="col">
                         <form class="form-floating">
-                            <input class="form-control" id="floatingBaseTen" type="text" value="10# - 171" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseTen">Base 10 (10#)</label>
+                            <input class="form-control" id="floatingBaseTen" type="text" value="10# 171" aria-label="Disabled input example" disabled readonly>
+                            <label for="floatingBaseTen">Base 10 (Decimal)</label>
                         </form>
                     </div>
 
                     <div class="col">
                         <form class="form-floating">
-                            <input class="form-control" id="floatingBaseS" type="text" value="16# - AB" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseS">Base 16 (16#)</label>
+                            <input class="form-control" id="floatingBaseS" type="text" value="16# AB" aria-label="Disabled input example" disabled readonly>
+                            <label for="floatingBaseS">Base 16 (Hexadecimal)</label>
                         </form>
                     </div>
                 </div>
