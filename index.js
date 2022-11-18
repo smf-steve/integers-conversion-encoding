@@ -39,9 +39,9 @@ function convert() {
             break;
     }
     if (isASCII(num)) {
-        var decVal = parseInt(num, 16);
+        var decVal = parseInt(num, 10);
         if (Number.isInteger(decVal)) {
-            validInput(decVal);
+            validInput(parseInt(decVal, 10));
         }
     } else invalidInput();
 
@@ -55,6 +55,7 @@ function validInput(decimalVal) {
     document.getElementById("floatingBaseS").value = "#16 0x" +format2_16(decimalVal.toString(16)); 
 
     document.getElementById("ascii").value = ascii(decimalVal);
+
   
 }                 
 function ascii(decimalVal){
@@ -103,12 +104,9 @@ function isHex(numVal) {
     }
     else return false;
 }
-function isASCII(numVal){
-    var range = /[\x00-\x7F]/g;
-    if (numVal.match(range)){
-        return true;
-    }
-    else return false;
+function isASCII(hexVal){
+    var range = /^[\x00-\x7F]*$/g;
+    return hexVal.test(range);
 }
 function format2_16(strBase2) {
     var formattedStr = "";
