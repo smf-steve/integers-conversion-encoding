@@ -9,6 +9,7 @@ function convert() {
         case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
+                ascii(decVal);
                 validInput(decVal);
             }
             else invalidInput();
@@ -18,6 +19,7 @@ function convert() {
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
                 validInput(decVal);
+                ascii(decVal);
             }
             else invalidInput();
             break;
@@ -25,6 +27,7 @@ function convert() {
         case "0x":
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
+                ascii(decVal);
                 validInput(decVal);
             }
             else invalidInput();
@@ -33,18 +36,12 @@ function convert() {
         default:
             var decVal = parseInt(num, 10);
             if (Number.isInteger(decVal)) {
+                ascii(decVal);
                 validInput(decVal);
             }
             else invalidInput();
             break;
     }
-    if (isASCII(num)) {
-        var decVal = parseInt(num, 10);
-        if (Number.isInteger(decVal)) {
-            validInput(parseInt(decVal, 10));
-        }
-    } else invalidInput();
-
 }   
 
 function validInput(decimalVal) {
@@ -52,19 +49,20 @@ function validInput(decimalVal) {
     document.getElementById("floatingBase").value = "2# " + format2_16(decimalVal.toString(2));
     document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
     document.getElementById("floatingBaseEight").value = "8# 0o" + format8(decimalVal.toString(8));
-    document.getElementById("floatingBaseS").value = "#16 0x" +format2_16(decimalVal.toString(16)); 
-
-    document.getElementById("ascii").value = ascii(decimalVal);
-
-  
+    document.getElementById("floatingBaseS").value = "#16 0x" +format2_16(decimalVal.toString(16));   
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
     var str = '';
-    for (var n = 0; n < hex.length; n+=2){
-        str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
+    if (decimalVal < 33 || decimalVal > 254) {
+        str = "invalid";
     }
-    return str;
+    else {
+       for (var n = 0; n < hex.length; n+=2){
+            str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
+        } 
+    } 
+    document.getElementById("ascii").value = str;
 }
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
@@ -103,10 +101,6 @@ function isHex(numVal) {
         return true;
     }
     else return false;
-}
-function isASCII(hexVal){
-    var range = /^[\x00-\x7F]*$/g;
-    return hexVal.test(range);
 }
 function format2_16(strBase2) {
     var formattedStr = "";
