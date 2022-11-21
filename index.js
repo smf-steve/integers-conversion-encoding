@@ -10,6 +10,8 @@ function convert() {
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
                 ascii(decVal);
+                onesComplement(num);
+                twosComplement();
                 validInput(decVal);
             }
             else invalidInput();
@@ -19,6 +21,8 @@ function convert() {
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
                 validInput(decVal);
+                onesComplement(decVal.toString(2));
+                twosComplement();
                 ascii(decVal);
             }
             else invalidInput();
@@ -28,6 +32,8 @@ function convert() {
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
                 ascii(decVal);
+                onesComplement(decVal.toString(2));
+                twosComplement();
                 validInput(decVal);
             }
             else invalidInput();
@@ -37,6 +43,8 @@ function convert() {
             var decVal = parseInt(num, 10);
             if (Number.isInteger(decVal)) {
                 ascii(decVal);
+                onesComplement(decVal.toString(2));
+                twosComplement();
                 validInput(decVal);
             }
             else invalidInput();
@@ -123,4 +131,18 @@ function setNeg(rawVal){
       sign = true;
     }
 }
-
+function onesComplement(binVal) {
+    var str = "";
+    for (let i = 0; i < binVal.length; i++) {
+        if (binVal[i] == 0) {
+          str += "1";
+        }
+        else str += "0";
+    }
+    document.getElementById("onesComplement").value = str;
+}
+function twosComplement() {
+    var one = document.getElementById("onesComplement").value;
+    one = parseInt(one, 2) + 1;
+    document.getElementById("twosComplement").value = one.toString(2);
+}
