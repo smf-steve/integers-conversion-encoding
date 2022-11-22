@@ -2,7 +2,7 @@ function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1) || rawVal.indexOf("b") + 1,);
-    num = num.replace(/ -/g, "");
+    num = num.replace(/[-, ]/g, "");
     switch (base) {
         case "2#":
         case "0b":
@@ -24,7 +24,7 @@ function convert() {
         case "0x":
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
-                twosComplement(decVal);
+                validInput(decVal);
             }
             else invalidInput();
             break;
