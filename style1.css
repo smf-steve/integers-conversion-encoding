@@ -47,6 +47,9 @@ form .btn-outline-dark {
     background-color: inherit;
 }
 
+.row .card-text{
+    text-align: center;
+}
 
 .masthead {
   position: relative;
@@ -65,7 +68,7 @@ form .btn-outline-dark {
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.1));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
@@ -171,10 +174,78 @@ form .btn-outline-dark {
     line-height: 6.5rem;
     letter-spacing: 0.8rem;
   }
-  .masthead h2 {
-    max-width: 30rem;
-    font-size: 1.25rem;
-  }
+}
+
+@media (max-width: 991.5px){
+    .dec-encode button{
+        height: 40px;
+        padding: 1px;
+        font-size: 13px;
+        width: 150px;
+    }
+    .dec-encode .card-title{
+        text-align: center;
+        font-size: 13px;
+    }
+}
+/*@media (max-device-width: 700px){
+    *{
+        color: red;
+    }
+}*/
+@media (max-width: 767.5px){
+    .input {
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;  
+    }
+    .bases .col{
+        margin-left: 23%;
+        margin-right: 23%;
+        margin-top: 2%;
+    }
+    .dec-encode{
+        flex-direction: column-reverse;
+        text-align: center;
+        justify-content: center;
+    }
+    .dec-encode .top{
+        width: 100%;
+        margin-left: 50%;
+    }
+    .dec-encode button{
+        height: 40px;
+        padding: 1px;
+        font-size: 13px;
+        width: 150px;
+    }
+    .dec-encode .card-title{
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 460px){
+    .masthead h1{
+        font-size: 2rem;
+    }
+    .dec-encode .dec-boxes{
+        width: 150%;
+    }
+    .dec-encode .mar{
+        margin-left: 25%!important;
+    }
+}
+
+@media (max-width: 315px){
+    .masthead h1{
+        font-size: 1.5rem;
+    }
+    .card-header{
+        font-size: 0.8rem;
+    }
+    *{
+        color: red;
+    }
 }
 
 html {

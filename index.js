@@ -1,3 +1,10 @@
+// DOMContentLoaded means when DOM objects are loaded, function() will be invoked
+// Whenever page refreshes or is opened, takes user straight to integer conversion
+document.addEventListener("DOMContentLoaded", function() {
+    window.location.hash = '#integer';
+});
+let cDec;
+let i = -1;
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
@@ -32,6 +39,7 @@ function convert() {
         case "10#":
         default:
             var decVal = parseInt(num, 10);
+            cDec = decVal;
             if (Number.isInteger(decVal)) {
                 validInput(decVal);
             }
@@ -131,4 +139,40 @@ function setNeg(rawVal){
       sign = true;
     }
 }
+function stepBy(){
+    if(Number.isInteger(cDec) && i == -1){
+        document.getElementById("stepOne").innerHTML = cDec + " / 2 = " + Math.floor(cDec/2) + ", " + cDec%2;
+        cDec = Math.floor(cDec/2);  
+        i++;  
+    }
+    else if (Number.isInteger(cDec) && i == 0){
+        toBinary(cDec);
+        cDec = Math.floor(cDec/2);
+    }
+}
+function toBinary(n){
+    if(n == 0 && i == 0){
+        document.getElementById("stepOne").innerHTML += "<br>" + (n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
+        i++;
+       // return String(n);
+        //document.getElementById("stepOne").innerHTML += String(n);
+    }
+    else if(i==0){
+    document.getElementById("stepOne").innerHTML += "<br>" + n + " / 2 = " + Math.floor(n/2) + ", " + n%2;
+    }//return toBinary(Math.floor(n/2)) + String(n % 2);
+        // let t = toBinary(n/2);
+    // let x = n % 2;
+    // return t.toString() + x.toString();
+    console.log(n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
+};
+//console.log(toBinary(5));
+
+/*
+public String toBinary(int n){
+    if(n <= 1){
+        return String.valueOf(n);
+    }
+    return toBinary(n/2) + String.valueOf(n % 2);
+}
+*/
 
