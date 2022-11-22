@@ -114,15 +114,14 @@
                     <div class="col">
                         <form class="form-floating">             
                             <input class="form-control" type="text" id="floatingBase" value="2# 1010 1011" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBase">Base 2 (Binary)</label>  
+                            <label for="floatingBase">Base 2 (2#)(0b)</label>  
                         </form>
                     </div>
 
                     <div class="col">
                         <form class="form-floating">
                             <input class="form-control" id="floatingBaseEight" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">Base 8 (Octal)</label>        
-                        </form>
+                            <label for="floatingBaseEight">Base 8 (8#)(0o)</label>      </form>
                     </div>
 
                     <div class="col">
@@ -135,7 +134,7 @@
                     <div class="col">
                         <form class="form-floating">
                             <input class="form-control" id="floatingBaseS" type="text" value="16# AB" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseS">Base 16 (Hexadecimal)</label>
+                            <label for="floatingBaseS">Base 16 (16#)(0x)</label>
                         </form>
                     </div>
                 </div>
@@ -183,56 +182,54 @@
                         <div class="row row-cols-1 row-cols-md-2 g-2">
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">Unsigned Int</label>           </form>
+                                    <form class="form-floating">
+                                        <input class="form-control" id="UnsignedInt" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
+                                        <label for="UnsignedInt">Unsigned Int</label>           
+                                    </form>
                                 </div>
                             </div>
-
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">UTF-8</label>           
-                        </form>
+                                    <form class="form-floating">
+                                        <input class="form-control" id="signedInt" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
+                                        <label for="signedInt">Signed Int</label>           
+                                    </form>
                                 </div>
                             </div> 
-
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">2s complement</label>           </form>
+                                    <form class="form-floating">        
+                                        <input class="form-control" id="twosComplement" type="text" value="" aria-label="Disabled input example" disabled readonly>
+                                        <label for="twosComplement">2s Complement</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseEight">1s complement</label>         
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="ascii" type="text" value="" aria-label="Disabled input example" disabled readonly>
+                                    <label for="ascii">ASCII</label>           
+                                    </form>
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="ascii" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="ascii">ASCII</label>           
-                        </form>
+                                    <form class="form-floating">
+                                        <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseEight">Base64</label> 
+                                    </form>                                
                                 </div>
                             </div>
-
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">1s complement</label>         
-                        </form>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">Base64</label>           
-                        </form>                                
-                                </div>
-                                </div>
-                            </div>
+                        </div>
                         </div>                            
                     </div>
                 </div>
