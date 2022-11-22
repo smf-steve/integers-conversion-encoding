@@ -1,17 +1,13 @@
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
-    setNeg(rawVal);
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1) || rawVal.indexOf("b") + 1,);
-    num = num.replace(/ /g, "");
+    num = num.replace(/ -/g, "");
     switch (base) {
         case "2#":
         case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
-                ascii(decVal);
-                onesComplement(num);
-                twosComplement();
                 validInput(decVal);
             }
             else invalidInput();
@@ -21,9 +17,6 @@ function convert() {
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
                 validInput(decVal);
-                onesComplement(decVal.toString(2));
-                twosComplement();
-                ascii(decVal);
             }
             else invalidInput();
             break;
@@ -31,10 +24,7 @@ function convert() {
         case "0x":
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
-                ascii(decVal);
-                onesComplement(decVal.toString(2));
-                twosComplement();
-                validInput(decVal);
+                twosComplement(decVal);
             }
             else invalidInput();
             break;
@@ -42,9 +32,6 @@ function convert() {
         default:
             var decVal = parseInt(num, 10);
             if (Number.isInteger(decVal)) {
-                ascii(decVal);
-                onesComplement(decVal.toString(2));
-                twosComplement();
                 validInput(decVal);
             }
             else invalidInput();
@@ -56,8 +43,11 @@ function validInput(decimalVal) {
 
     document.getElementById("floatingBase").value = "2# " + format2_16(decimalVal.toString(2));
     document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
-    document.getElementById("floatingBaseEight").value = "8# 0o" + format8(decimalVal.toString(8));
-    document.getElementById("floatingBaseS").value = "#16 0x" +format2_16(decimalVal.toString(16));   
+    document.getElementById("floatingBaseEight").value = "8# " + format8(decimalVal.toString(8));
+    document.getElementById("floatingBaseS").value = "16# " +format2_16(decimalVal.toString(16));
+    document.getElementById("onesComplement").value = onesComplement(decimalVal.toString(2));  
+    document.getElementById("ascii").value = ascii(decimalVal); 
+    document.getElementById("twosComplement").value = twosComplement(decimalVal);
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
@@ -70,7 +60,7 @@ function ascii(decimalVal){
             str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
         } 
     } 
-    document.getElementById("ascii").value = str;
+    return str;
 }
 function isBinary(dec){
     for(let i = 0; i < dec.length; i++){
@@ -124,25 +114,36 @@ function format8(strBase8) {
     return formattedStr;
 }
 
-function setNeg(rawVal){
+function neg(rawVal){
     var sign = false;
     if (rawVal.indexOf('-') > -1)
     {
       sign = true;
     }
-}
+    return sign;
+  }
 function onesComplement(binVal) {
     var str = "";
-    for (let i = 0; i < binVal.length; i++) {
-        if (binVal[i] == 0) {
-          str += "1";
-        }
-        else str += "0";
+    if (!neg(document.getElementById("floatingInputVal").value)) {
+        str = binVal;
+        return str;
     }
-    document.getElementById("onesComplement").value = str;
+    else {
+        for (let i = 0; i < binVal.length; i++) {
+            if (binVal[i] == 0) {
+              str += "1";
+            }
+            else str += "0";
+        }   
+            return str;
+    }
 }
-function twosComplement() {
-    var one = document.getElementById("onesComplement").value;
-    one = parseInt(one, 2) + 1;
-    document.getElementById("twosComplement").value = one.toString(2);
+
+function twosComplement(decVal) {
+    var one = onesComplement(decVal.toString(2)); 
+    if (neg(document.getElementById("floatingInputVal").value)) {
+        one = parseInt(one, 2) + 1;
+        return one.toString(2);
+    }
+    return one;
 }
