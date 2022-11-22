@@ -58,13 +58,14 @@ function validInput(decimalVal) {
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
     var str = '';
-    if (decimalVal < 33 || decimalVal > 254) {
-        str = "invalid";
-    }
-    else {
-       for (var n = 0; n < hex.length; n+=2){
-            str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
-        } 
+    var cur = '';
+    for (var n = 0; n < hex.length; n+=2){
+         cur = hex.substr(n, 2);
+         if (parseInt(cur, 16) < 33 || parseInt(cur, 16) > 254) {
+             return "inalid";
+         }
+         cur = String.fromCharCode(parseInt(cur, 16));
+         str += cur;
     } 
     return str;
 }
