@@ -131,7 +131,7 @@ function neg(rawVal){
 }
 function onesComplement(binVal) {
     var str = "";
-    if (!neg(binVal)) {
+    if (!neg(document.getElementById("floatingInputVal").value)) {
         str = binVal;
         return str;
     }
@@ -142,19 +142,26 @@ function onesComplement(binVal) {
             }
             else str += "0";
         }   
-            return str;
+        return str;
     }
 }
 function twosComplement(decVal) {
     var one = onesComplement(decVal.toString(2)); 
+    var two = "", temp = "";
     if (neg(document.getElementById("floatingInputVal").value)) {
-        one = parseInt(one, 2) + 1;
-        return one.toString(2);
+        two = (parseInt(one, 2) + 1).toString(2);
+        if (one.length != two.length) {
+           for (let i = 0; i < (one.length - two.length); i++) {
+                temp += "0";
+            }
+        }
+        temp += two;   
+        return temp;
     }
     return one;
 }
 function bit16(binVal) {
-    var negStat = neg(document.getElementById("floatingInputVal").value)
+    var negStat = neg(document.getElementById("floatingInputVal").value);
     var str = "";
     for (let i = 0; i < 16 - binVal.length; i++) {
         if (negStat){
