@@ -62,7 +62,7 @@ function ascii(decimalVal){
     for (var n = 0; n < hex.length; n+=2){
          cur = hex.substr(n, 2);
          if (parseInt(cur, 16) < 33 || parseInt(cur, 16) > 254) {
-             return "inalid";
+             return "invalid";
          }
          cur = String.fromCharCode(parseInt(cur, 16));
          str += cur;
