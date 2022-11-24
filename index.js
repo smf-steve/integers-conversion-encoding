@@ -5,11 +5,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 let cDec;
 let i = -1;
+
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
+    rawVal = rawVal.replace(/[-, ]/g, "");
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
-    var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1) || rawVal.indexOf("b") + 1,);
-    num = num.replace(/[-, ]/g, "");
+    var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1),);
     switch (base) {
         case "2#":
         case "0b":
@@ -38,32 +39,45 @@ function convert() {
         case "10#":
         default:
             var decVal = parseInt(num, 10);
-            cDec = decVal;
             if (Number.isInteger(decVal)) {
+                cDec = decVal;
                 validInput(decVal);
             }
             else invalidInput();
             break;
     }
 }   
-
 function validInput(decimalVal) {
-    document.getElementById("floatingBaseEight").value = "8# " + format8(decimalVal.toString(8));
-    document.getElementById("floatingBaseS").value = "16# " +format2_16(decimalVal.toString(16));
-    document.getElementById("onesComplement").value = onesComplement(decimalVal.toString(2));  
+    if (!neg(document.getElementById("floatingInputVal").value)) {
+        document.getElementById("floatingBase").value = "2# " + format2_16(decimalVal.toString(2));
+        document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
+        document.getElementById("floatingBaseEight").value = "8# " + format8(decimalVal.toString(8));
+        document.getElementById("floatingBaseS").value = "16# " +format2_16(decimalVal.toString(16)); 
+    }
+    else {
+        document.getElementById("floatingBase").value = "2# -" + format2_16(decimalVal.toString(2));
+        document.getElementById("floatingBaseTen").value = "10# -" + decimalVal;
+        document.getElementById("floatingBaseEight").value = "8# -" + format8(decimalVal.toString(8));
+        document.getElementById("floatingBaseS").value = "16# -" +format2_16(decimalVal.toString(16));
+    }
+    document.getElementById("onesComplement").value = format2_16(bit16(onesComplement(decimalVal.toString(2))));  
     document.getElementById("ascii").value = ascii(decimalVal); 
-    document.getElementById("twosComplement").value = twosComplement(decimalVal);
+    document.getElementById("twosComplement").value = format2_16(bit16(twosComplement(decimalVal)));
+    document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
+    document.getElementById("signedInt").value = signedInt(decimalVal);
+    document.getElementById("base64").value = base64(decimalVal);
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
     var str = '';
-    if (decimalVal < 33 || decimalVal > 254) {
-        str = "invalid";
-    }
-    else {
-       for (var n = 0; n < hex.length; n+=2){
-            str += String.fromCharCode(parseInt(hex.substr(n, n + 2), 16));
-        } 
+    var cur = '';
+    for (var n = 0; n < hex.length; n+=2){
+         cur = hex.substr(n, 2);
+         if (parseInt(cur, 16) < 33 || parseInt(cur, 16) > 254) {
+             return "invalid";
+         }
+         cur = String.fromCharCode(parseInt(cur, 16));
+         str += cur;
     } 
     return str;
 }
@@ -79,8 +93,9 @@ function invalidInput() {
     document.getElementById("floatingBaseEight").value = "invalid number";
     document.getElementById("floatingBaseTen").value = "invalid number";
     document.getElementById("floatingBaseS").value = "invalid number";
-
     document.getElementById("ascii").value = "invalid number";
+    document.getElementById("onesComplement").value = "invalid number";
+    document.getElementById("twosComplement").value = "invalid number";
 }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
@@ -105,14 +120,6 @@ function isHex(numVal) {
     }
     else return false;
 }
-function isASCII(numVal){
-    var range = /[\x00-\x7F]/g;
-    if (numVal.match(range)){
-        return true;
-    }
-    else return false;
-}
-
 function format2_16(strBase2) {
     var formattedStr = "";
     var formattedStr = strBase2.match(/.{1,4}/g);
@@ -126,7 +133,6 @@ function format8(strBase8) {
     formattedStr = formattedStr.join(' ');
     return formattedStr;
 }
-
 function neg(rawVal){
     var sign = false;
     if (rawVal.indexOf('-') > -1)
@@ -134,7 +140,7 @@ function neg(rawVal){
       sign = true;
     }
     return sign;
-  }
+}
 function onesComplement(binVal) {
     var str = "";
     if (!neg(document.getElementById("floatingInputVal").value)) {
@@ -148,9 +154,66 @@ function onesComplement(binVal) {
             }
             else str += "0";
         }   
-            return str;
+        return str;
     }
 }
+function twosComplement(decVal) {
+    var one = onesComplement(decVal.toString(2)); 
+    var two = "", temp = "";
+    if (neg(document.getElementById("floatingInputVal").value)) {
+        two = (parseInt(one, 2) + 1).toString(2);
+        if (one.length != two.length) {
+           for (let i = 0; i < (one.length - two.length); i++) {
+                temp += "0";
+            }
+        }
+        temp += two;
+        return temp;
+    }
+    return one;
+}
+function bit16(binVal) {
+    var negStat = neg(document.getElementById("floatingInputVal").value);
+    var str = "";
+    for (let i = 0; i < 16 - binVal.length; i++) {
+        if (negStat){
+            str += '1';
+        } 
+        else str += '0';
+    }
+    str += binVal;
+  return str;
+}
+function signedInt(decVal){
+    var str = "";
+    if (neg(document.getElementById("floatingInputVal").value)){
+        str = '-' + decVal;
+    }
+    else str = decVal;
+    return str;
+}
+function unsignedInt(decVal) {
+    var str = "";
+    if (!neg(document.getElementById("floatingInputVal").value)) {
+        return decVal;
+    }
+    else {
+        str += bit16(twosComplement(decVal));
+        return parseInt(str, 2);
+    }
+
+}
+var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+function base64(decVal){
+    var result = '', mod;
+    do {
+        mod = decVal % 64;
+        result = ALPHA.charAt(mod) + result;
+        decVal = Math.floor(decVal / 64);
+    } while(decVal > 0);
+    return result;
+}
+
 function stepBy(){
     if(Number.isInteger(cDec) && i == -1){
         document.getElementById("stepOne").innerHTML = cDec + " / 2 = " + Math.floor(cDec/2) + ", " + cDec%2;
@@ -187,12 +250,3 @@ public String toBinary(int n){
     return toBinary(n/2) + String.valueOf(n % 2);
 }
 */
-
-function twosComplement(decVal) {
-    var one = onesComplement(decVal.toString(2)); 
-    if (neg(document.getElementById("floatingInputVal").value)) {
-        one = parseInt(one, 2) + 1;
-        return one.toString(2);
-    }
-    return one;
-}
