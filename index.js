@@ -56,6 +56,7 @@ function validInput(decimalVal) {
     document.getElementById("twosComplement").value = format2_16(bit16(twosComplement(decimalVal)));
     document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
     document.getElementById("signedInt").value = signedInt(decimalVal);
+    document.getElementById("base64").value = base64(decimalVal);
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
@@ -192,4 +193,14 @@ function unsignedInt(decVal) {
         return parseInt(str, 2);
     }
 
+}
+var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+function base64(decVal){
+    var result = '', mod;
+    do {
+        mod = decVal % 64;
+        result = ALPHA.charAt(mod) + result;
+        decVal = Math.floor(decVal / 64);
+    } while(decVal > 0);
+    return result;
 }
