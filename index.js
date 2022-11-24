@@ -54,6 +54,8 @@ function validInput(decimalVal) {
     document.getElementById("onesComplement").value = format2_16(bit16(onesComplement(decimalVal.toString(2))));  
     document.getElementById("ascii").value = ascii(decimalVal); 
     document.getElementById("twosComplement").value = format2_16(bit16(twosComplement(decimalVal)));
+    document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
+    document.getElementById("signedInt").value = signedInt(decimalVal);
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
@@ -155,7 +157,7 @@ function twosComplement(decVal) {
                 temp += "0";
             }
         }
-        temp += two;   
+        temp += two;
         return temp;
     }
     return one;
@@ -173,6 +175,21 @@ function bit16(binVal) {
   return str;
 }
 function signedInt(decVal){
-    var binVal = twosComplement(decVal);
-    return parseInt(binVal, 2);
+    var str = "";
+    if (neg(document.getElementById("floatingInputVal").value)){
+        str = '-' + decVal;
+    }
+    else str = decVal;
+    return str;
+}
+function unsignedInt(decVal) {
+    var str = "";
+    if (!neg(document.getElementById("floatingInputVal").value)) {
+        return decVal;
+    }
+    else {
+        str += bit16(twosComplement(decVal));
+        return parseInt(str, 2);
+    }
+
 }
