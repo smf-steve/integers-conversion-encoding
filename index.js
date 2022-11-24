@@ -172,3 +172,7 @@ function bit16(binVal) {
     str += binVal;
   return str;
 }
+function signedInt(decVal){
+    var binVal = twosComplement(decVal);
+    return parseInt(binVal, 2);
+}
