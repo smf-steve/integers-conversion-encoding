@@ -105,13 +105,13 @@ function isHex(numVal) {
     }
     else return false;
 }
-// function isASCII(numVal){
-//     var range = /[\x00-\x7F]/g;
-//     if (numVal.match(range)){
-//         return true;
-//     }
-//     else return false;
-// }
+function isASCII(numVal){
+    var range = /[\x00-\x7F]/g;
+    if (numVal.match(range)){
+        return true;
+    }
+    else return false;
+}
 
 function format2_16(strBase2) {
     var formattedStr = "";
