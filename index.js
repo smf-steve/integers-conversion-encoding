@@ -11,6 +11,7 @@ function convert() {
     rawVal = rawVal.replace(/[-, ]/g, "");
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1),);
+    i = -1;
     switch (base) {
         case "2#":
         case "0b":
@@ -77,7 +78,9 @@ function ascii(decimalVal){
              return "invalid";
          }
          cur = String.fromCharCode(parseInt(cur, 16));
+         console.log(cur);
          str += cur;
+         console.log(str);
     } 
     return str;
 }
@@ -229,24 +232,10 @@ function toBinary(n){
     if(n == 0 && i == 0){
         document.getElementById("stepOne").innerHTML += "<br>" + (n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
         i++;
-       // return String(n);
-        //document.getElementById("stepOne").innerHTML += String(n);
     }
     else if(i==0){
     document.getElementById("stepOne").innerHTML += "<br>" + n + " / 2 = " + Math.floor(n/2) + ", " + n%2;
-    }//return toBinary(Math.floor(n/2)) + String(n % 2);
-        // let t = toBinary(n/2);
-    // let x = n % 2;
-    // return t.toString() + x.toString();
-    console.log(n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
-};
-//console.log(toBinary(5));
-
-/*
-public String toBinary(int n){
-    if(n <= 1){
-        return String.valueOf(n);
     }
-    return toBinary(n/2) + String.valueOf(n % 2);
-}
-*/
+};
+
+//String.format('{0} / 2 = {0} , {0}', n, Math.floor(n/2), n%2);
