@@ -17,6 +17,7 @@ function convert() {
         case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
+                cDec = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -25,6 +26,7 @@ function convert() {
         case "0o":
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
+                cDec = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -33,6 +35,7 @@ function convert() {
         case "0x":
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
+                cDec = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -117,8 +120,8 @@ function isOctal(numVal) {
       return true;
 }                  
 function isHex(numVal) {
-    var check = /[a-fA-F0-9]/g;
-    if (numVal.match(check)) {
+    var reg = /^[0-9A-F]{1,}$/i; // range of valid hex numbers 
+    if (numVal.match(reg)){
         return true;
     }
     else return false;
@@ -208,6 +211,7 @@ function unsignedInt(decVal) {
 }
 var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 function base64(decVal){
+    // get the remainder when divided by 64 and appends the char to the result
     var result = '', mod;
     do {
         mod = decVal % 64;
@@ -236,6 +240,13 @@ function toBinary(n){
     else if(i==0){
     document.getElementById("stepOne").innerHTML += "<br>" + n + " / 2 = " + Math.floor(n/2) + ", " + n%2;
     }
-};
+}
+
+function toDecimal(binNum){
+    let v = 0;
+    for (let i = binNum.length - 1; i >= 0; i--){
+        document.getElementById("stepBy").innerHTML += binNum.charAt(i) * 2;
+    }
+}
 
 //String.format('{0} / 2 = {0} , {0}', n, Math.floor(n/2), n%2);
