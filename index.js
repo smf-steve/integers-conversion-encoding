@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     window.location.hash = '#integer';
 });
 let cDec;
-let i = -1;
+let i = -1, j = -1;
+let index = 0, val = 0;
 
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
@@ -242,10 +243,28 @@ function toBinary(n){
     }
 }
 
-function toDecimal(binNum){
-    let v = 0;
-    for (let i = binNum.length - 1; i >= 0; i--){
-        document.getElementById("stepBy").innerHTML += binNum.charAt(i) * 2;
+function stepDec(){
+    cDec = cDec.toString(2);
+    if (j == -1) {
+        document.getElementById("divStep").innerHTML = val + " * 2 + " + cDec.charAt(index) + " = " + (val*2+parseInt(cDec.charAt(index)));
+        val = (val*2+parseInt(cDec.charAt(index)));
+        index++, j++;
+    }
+    else if (index < cDec.length && j == 0) {
+        toDecimal(cDec); 
+    }
+}
+
+function toDecimal(binNum) {
+    if (index == binNum.length - 1 && j == 0) {
+        document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
+        val = (val*2+parseInt(binNum.charAt(index)));
+        index = 0, val = 0, j++;
+    }
+    else if (j == 0) { 
+        document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
+        val = (val*2+parseInt(binNum.charAt(index)));
+        index++;
     }
 }
 
