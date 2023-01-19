@@ -104,6 +104,9 @@ function invalidInput() {
     document.getElementById("ascii").value = "invalid number";
     document.getElementById("onesComplement").value = "invalid number";
     document.getElementById("twosComplement").value = "invalid number";
+    document.getElementById("UnsignedInt").value = "invalid number";
+    document.getElementById("signedInt").value = "invalid number";
+    document.getElementById("base64").value="invalid number";
 }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
@@ -225,7 +228,7 @@ function base64(decVal){
 
 function stepBy(){
     if(i == -1){
-        document.getElementById("stepOne").innerHTML = cDec + " / 2 = " + Math.floor(cDec/2) + ", " + cDec%2;
+        document.getElementById("stepOne").innerHTML = `${cDec} / 2 = ${Math.floor(cDec/2)} , ${cDec%2}`;
         cDec = Math.floor(cDec/2);  
         i++;  
     }
@@ -235,19 +238,16 @@ function stepBy(){
     }
 }
 function toBinary(n){
+    document.getElementById("stepOne").innerHTML += `<br> ${n} / 2 = ${Math.floor(n/2)} , ${n%2}`;
     if(n == 0){
-        document.getElementById("stepOne").innerHTML += "<br>" + (n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
         i++;
-    }
-    else{
-    document.getElementById("stepOne").innerHTML += "<br>" + n + " / 2 = " + Math.floor(n/2) + ", " + n%2;
     }
 }
 
 function stepDec(){
     decNum = decNum.toString(2);
     if (j == -1) {
-        document.getElementById("divStep").innerHTML = val + " * 2 + " + decNum.charAt(index) + " = " + (val*2+parseInt(decNum.charAt(index)));
+        document.getElementById("divStep").innerHTML = `${val} * 2 + ${decNum.charAt(index)} = ${val*2+parseInt(decNum.charAt(index))}`;
         val = (val*2+parseInt(decNum.charAt(index)));
         index++, j++;
     }
@@ -257,7 +257,7 @@ function stepDec(){
 }
 
 function toDecimal(binNum) {
-    document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
+    document.getElementById("divStep").innerHTML += `<br> ${val} * 2 + ${binNum.charAt(index)} = ${val*2+parseInt(binNum.charAt(index))}`;
     val = val*2+parseInt(binNum.charAt(index));
 
     if (index == binNum.length - 1) {
@@ -269,3 +269,4 @@ function toDecimal(binNum) {
 }
 
 //String.format('{0} / 2 = {0} , {0}', n, Math.floor(n/2), n%2);
+// "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
