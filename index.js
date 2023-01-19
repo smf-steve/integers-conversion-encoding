@@ -3,22 +3,23 @@
 document.addEventListener("DOMContentLoaded", function() {
     window.location.hash = '#integer';
 });
-let cDec;
-let i = -1, j = -1;
-let index = 0, val = 0;
+let cDec, decNum;
+let i, j;
+let index, val;
 
 function convert() {
     var rawVal = document.getElementById("floatingInputVal").value;
     rawVal = rawVal.replace(/[-, ]/g, "");
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1),);
-    i = -1;
+    i = -1, j = -1;
+    index = 0, val = 0;
     switch (base) {
         case "2#":
         case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
-                cDec = decVal;
+                cDec = decNum = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -27,7 +28,7 @@ function convert() {
         case "0o":
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
-                cDec = decVal;
+                cDec = decNum = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -36,7 +37,7 @@ function convert() {
         case "0x":
             if (isHex(num)) {
                 var decVal = parseInt(num, 16);
-                cDec = decVal;
+                cDec = decNum = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -45,7 +46,7 @@ function convert() {
         default:
             var decVal = parseInt(num, 10);
             if (Number.isInteger(decVal)) {
-                cDec = decVal;
+                cDec = decNum = decVal;
                 validInput(decVal);
             }
             else invalidInput();
@@ -223,47 +224,46 @@ function base64(decVal){
 }
 
 function stepBy(){
-    if(Number.isInteger(cDec) && i == -1){
+    if(i == -1){
         document.getElementById("stepOne").innerHTML = cDec + " / 2 = " + Math.floor(cDec/2) + ", " + cDec%2;
         cDec = Math.floor(cDec/2);  
         i++;  
     }
-    else if (Number.isInteger(cDec) && i == 0){
+    else if (i == 0){
         toBinary(cDec);
         cDec = Math.floor(cDec/2);
     }
 }
 function toBinary(n){
-    if(n == 0 && i == 0){
+    if(n == 0){
         document.getElementById("stepOne").innerHTML += "<br>" + (n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
         i++;
     }
-    else if(i==0){
+    else{
     document.getElementById("stepOne").innerHTML += "<br>" + n + " / 2 = " + Math.floor(n/2) + ", " + n%2;
     }
 }
 
 function stepDec(){
-    cDec = cDec.toString(2);
+    decNum = decNum.toString(2);
     if (j == -1) {
-        document.getElementById("divStep").innerHTML = val + " * 2 + " + cDec.charAt(index) + " = " + (val*2+parseInt(cDec.charAt(index)));
-        val = (val*2+parseInt(cDec.charAt(index)));
+        document.getElementById("divStep").innerHTML = val + " * 2 + " + decNum.charAt(index) + " = " + (val*2+parseInt(decNum.charAt(index)));
+        val = (val*2+parseInt(decNum.charAt(index)));
         index++, j++;
     }
-    else if (index < cDec.length && j == 0) {
-        toDecimal(cDec); 
+    else if (index < decNum.length && j == 0) {
+        toDecimal(decNum); 
     }
 }
 
 function toDecimal(binNum) {
-    if (index == binNum.length - 1 && j == 0) {
-        document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
-        val = (val*2+parseInt(binNum.charAt(index)));
-        index = 0, val = 0, j++;
+    document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
+    val = val*2+parseInt(binNum.charAt(index));
+
+    if (index == binNum.length - 1) {
+        j++;
     }
-    else if (j == 0) { 
-        document.getElementById("divStep").innerHTML += "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
-        val = (val*2+parseInt(binNum.charAt(index)));
+    else{ 
         index++;
     }
 }
