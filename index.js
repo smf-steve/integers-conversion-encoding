@@ -79,13 +79,17 @@ function ascii(decimalVal){
     var cur = '';
     for (var n = 0; n < hex.length; n+=2){
          cur = hex.substr(n, 2);
-         if (parseInt(cur, 16) < 33 || parseInt(cur, 16) > 254) {
+         if (parseInt(cur, 16) < 32 || parseInt(cur, 16) > 126) {
              return "invalid";
          }
+         if(parseInt(cur, 16) == 32){
+            return "\"space\"";
+         } else {
          cur = String.fromCharCode(parseInt(cur, 16));
          console.log(cur);
          str += cur;
          console.log(str);
+        }
     } 
     return str;
 }
