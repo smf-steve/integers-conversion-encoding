@@ -85,10 +85,14 @@ function ascii(decimalVal){
          if (parseInt(cur, 16) < 32 || parseInt(cur, 16) > 254) {
              return "invalid";
          }
+         if(parseInt(cur, 16) == 32){
+            return "\"space\"";
+         } else {
          cur = String.fromCharCode(parseInt(cur, 16));
          console.log(cur);
          str += cur;
          console.log(str);
+        }
     } 
     return str;
 }
