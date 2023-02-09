@@ -1,16 +1,3 @@
-/* <header class="masthead">
-<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-    <div class="d-flex justify-content-center">
-        <div class="text-center">
-            <canvas id="bg"></canvas>
-
-            <h1 class="mx-auto my-0 text-uppercase">Integer Conversion Encoding</h1>
-            <div class="text-white-50 mx-auto mt-2 mb-5"></div>
-            <a class="btn btn-outline-light" href="#integer">To Conversion</a>
-        </div>
-    </div>
-</div>
-</header> */
 
 const scene = new THREE.Scene();
 
@@ -631,14 +618,8 @@ function toBinary(n){
         spanEle2.append(`2 = ${Math.floor(n/2)}, ${n%2}`);
         divEle.append(spanEle2);
         stepOne.append(divEle);
-       // stepOne.append(linebreak);
-    }//return toBinary(Math.floor(n/2)) + String(n % 2);
-        // let t = toBinary(n/2);
-    // let x = n % 2;
-    // return t.toString() + x.toString();
-    //console.log(n + " / 2 = " + Math.floor(n/2) + ", " + n%2);
+    }
 };
-//console.log(toBinary(5));
 
 function stepDec(){
     decNum = decNum.toString(2);
@@ -666,3 +647,19 @@ function toDecimal(binNum) {
 
 //String.format('{0} / 2 = {0} , {0}', n, Math.floor(n/2), n%2);
 // "<br>" + val + " * 2 + " + binNum.charAt(index) + " = " + (val*2+parseInt(binNum.charAt(index)));
+
+
+// Fluff, please leave for me - Luis
+/* <header class="masthead">
+<div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+    <div class="d-flex justify-content-center">
+        <div class="text-center">
+            <canvas id="bg"></canvas>
+
+            <h1 class="mx-auto my-0 text-uppercase">Integer Conversion Encoding</h1>
+            <div class="text-white-50 mx-auto mt-2 mb-5"></div>
+            <a class="btn btn-outline-light" href="#integer">To Conversion</a>
+        </div>
+    </div>
+</div>
+</header> */
