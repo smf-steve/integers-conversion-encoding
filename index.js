@@ -355,7 +355,7 @@ function base64(decVal){
         }
         mod=Number(mod)
         result = ALPHA.charAt(mod) + result;
-        decVal = decVal / 64n;
+        decVal = decVal / 64;
     } while(decVal > 0);
     return result;
 }
