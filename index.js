@@ -95,8 +95,8 @@ let index, val;
 
 function convert() {
     i = -1;
-    precision = 15;
-    binaryStr = "";
+    precision = 8; // the number of floating places considered 
+    binaryStr = ""; // final binary value for the decimal conversion
     var rawVal = document.getElementById("floatingInputVal").value;
     rawVal = rawVal.replace(/[-, ]/g, "");
     var base = rawVal.substr(0,(rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1));
@@ -265,6 +265,10 @@ function format2_16(strBase2) {
     var formattedStr = "";
     var formattedStr = strBase2.match(/.{1,4}/g);
     formattedStr = formattedStr.join(' ');
+
+    if (formattedStr.length < 4) {
+        formattedStr = '0'.repeat(4-formattedStr.length) + formattedStr;
+    }
     var upperCase = formattedStr.toUpperCase();
     return upperCase;
 }
@@ -272,6 +276,10 @@ function format8(strBase8) {
     var formattedStr = "";
     var formattedStr = strBase8.match(/.{1,3}/g);
     formattedStr = formattedStr.join(' ');
+
+    if (formattedStr.length < 3) {
+        formattedStr = '0'.repeat(3-formattedStr.length) + formattedStr;
+    }
     return formattedStr;
 }
 function neg(rawVal){
@@ -339,7 +347,7 @@ function unsignedInt(decVal) {
         return decVal;
     }
     else {
-        str += bit16(twosComplement(decVal));
+        str += bit16(decVal.toString());
         return parseInt(str, 2);
     }
 
