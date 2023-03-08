@@ -233,7 +233,7 @@ function invalidInput() {
     document.getElementById("twosComplement").value = "invalid number";
     document.getElementById("UnsignedInt").value = "invalid number";
     document.getElementById("signedInt").value = "invalid number";
-    document.getElementById("base64").value="invalid number";
+    //document.getElementById("base64").value="invalid number";
 }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
@@ -349,30 +349,28 @@ function unsignedInt(decVal) {
     }
 
 }
-var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
 function base64(decVal){
+    let result = "";
+    if (decVal < 0){
+        return "invalid number";
+    }
 
-    // Encode the String
-    decVal = ascii(decVal); //fixME
-    //alert(decVal);
-    var encodedStringBtoA = btoa(decVal);
+    var binVal = decVal.toString(2);
 
-    console.log(encodedStringBtoA);
-
-    // get the remainder when divided by 64 and appends the char to the result
-    // var result = '', mod;
-    // do {
-    //     try {
-    //         mod = decVal % BigInt(64);
-    //     }
-    //     catch(err){
-    //         mod = decVal % 64;
-    //     }
-    //     mod=Number(mod)
-    //     result = ALPHA.charAt(mod) + result;
-    //     decVal = decVal / 64;
-    // } while(decVal > 0);
-    // return result;
+    while(binVal.length % 6 != 0){
+        binVal = "0" + binVal;
+    }
+        console.log("Bin: " + binVal);
+    var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for(let i=0, k=6; i < binVal.length; i+=6, k+=6){
+        let val = binVal.substring(i, k);
+        console.log("Chunk: "+ val + "\n");
+        let dec = parseInt(val, 2);
+        console.log(dec + " " + ALPHA[dec] + "\n");
+        result += ALPHA[dec];
+    } 
+    return result;
 }
 
 let divWidth;
