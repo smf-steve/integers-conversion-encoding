@@ -197,7 +197,7 @@ function validInput(decimalVal) {
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
-    console.log("TTT: " + hex);
+    //console.log("TTT: " + hex);
     var str = '';
     var cur = '';
     for (var n = 0; n < hex.length; n+=2){
@@ -209,9 +209,9 @@ function ascii(decimalVal){
             return "sp";
          } else {
          cur = String.fromCharCode(parseInt(cur, 16));
-         console.log(cur);
+         //console.log(cur);
          str += cur;
-         console.log(str);
+         //console.log(str);
         }
     } 
     return str;
@@ -366,13 +366,10 @@ function base64(decVal){
     while(binVal.length % 6 != 0){
         binVal = "0" + binVal;
     }
-        console.log("Bin: " + binVal);
     var ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     for(let i=0, k=6; i < binVal.length; i+=6, k+=6){
         let val = binVal.substring(i, k);
-        console.log("Chunk: "+ val + "\n");
         let dec = parseInt(val, 2);
-        console.log(dec + " " + ALPHA[dec] + "\n");
         result += ALPHA[dec];
     } 
     return result;
