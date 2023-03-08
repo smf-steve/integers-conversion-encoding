@@ -263,24 +263,29 @@ function isHex(numVal) {
 }
 function format2_16(strBase2) {
     var formattedStr = "";
-    var formattedStr = strBase2.match(/.{1,4}/g);
-    formattedStr = formattedStr.join(' ');
-
-    if (formattedStr.length < 4) {
-        formattedStr = '0'.repeat(4-formattedStr.length) + formattedStr;
+    if (strBase2.length <= 4) {
+        formattedStr += '0'.repeat(4 - strBase2.length) + strBase2;
     }
-    var upperCase = formattedStr.toUpperCase();
-    return upperCase;
+    else {
+        var zeroes = Math.ceil(strBase2.length / 4) * 4 - strBase2.length;
+        formattedStr += '0'.repeat(zeroes) + strBase2;
+    }
+        
+    formattedStr = formattedStr.match(/.{1,4}/g).join(' ');
+
+    return formattedStr.toUpperCase();
 }
 function format8(strBase8) {
     var formattedStr = "";
-    var formattedStr = strBase8.match(/.{1,3}/g);
-    formattedStr = formattedStr.join(' ');
-
-    if (formattedStr.length < 3) {
-        formattedStr = '0'.repeat(3-formattedStr.length) + formattedStr;
+    if (strBase8.length <= 3) {
+        formattedStr += '0'.repeat(3 - strBase8.length) + strBase8;
     }
-    return formattedStr;
+    else {
+        var zeroes = Math.ceil(strBase8.length / 3) * 3 - strBase8.length;
+        formattedStr += '0'.repeat(zeroes) + strBase8;
+    }
+    formattedStr = formattedStr.match(/.{1,3}/g).join(' ');
+    return formattedStr.toUpperCase();
 }
 function neg(rawVal){
     var sign = false;
