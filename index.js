@@ -202,14 +202,11 @@ function ascii(decimalVal){
     var cur = '';
     for (var n = 0; n < hex.length; n+=2){
          cur = hex.substr(n, 2);
-         if (parseInt(cur, 16) === 32) {
-            return "\' \'";
-         }
-         if (parseInt(cur, 16) < 32 || parseInt(cur, 16) > 254) {
-             return "invalid";
+         if (parseInt(cur, 16) < 32 || parseInt(cur, 16) > 126) {
+             return "invalid number";
          }
          if(parseInt(cur, 16) == 32){
-            return "\"space\"";
+            return "sp";
          } else {
          cur = String.fromCharCode(parseInt(cur, 16));
          console.log(cur);
@@ -359,20 +356,28 @@ function unsignedInt(decVal) {
 }
 var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 function base64(decVal){
+
+    // Encode the String
+    decVal = ascii(decVal); //fixME
+    //alert(decVal);
+    var encodedStringBtoA = btoa(decVal);
+
+    console.log(encodedStringBtoA);
+
     // get the remainder when divided by 64 and appends the char to the result
-    var result = '', mod;
-    do {
-        try {
-            mod = decVal % BigInt(64);
-        }
-        catch(err){
-            mod = decVal % 64;
-        }
-        mod=Number(mod)
-        result = ALPHA.charAt(mod) + result;
-        decVal = decVal / 64;
-    } while(decVal > 0);
-    return result;
+    // var result = '', mod;
+    // do {
+    //     try {
+    //         mod = decVal % BigInt(64);
+    //     }
+    //     catch(err){
+    //         mod = decVal % 64;
+    //     }
+    //     mod=Number(mod)
+    //     result = ALPHA.charAt(mod) + result;
+    //     decVal = decVal / 64;
+    // } while(decVal > 0);
+    // return result;
 }
 
 let divWidth;
