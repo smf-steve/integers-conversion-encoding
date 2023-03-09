@@ -109,7 +109,7 @@ function convert() {
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
                 cDec = decNum = decVal;
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
@@ -118,7 +118,7 @@ function convert() {
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
                 cDec = decNum = decVal;
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
@@ -140,7 +140,7 @@ function convert() {
                 cDec = decNum = decVal;
                 //var decVal = num.toString(16);
                 //var decVal = parseInt(num,16);
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
@@ -169,31 +169,35 @@ function convert() {
             }
             if (Number.isInteger(decVal)) {
                 cDec = decNum = decVal;
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
     }
 }   
-function validInput(decimalVal) {
+function validInput(decimalVal, base) {
     if (!neg(document.getElementById("floatingInputVal").value)) {
-        document.getElementById("floatingBase").value = "2# " + format2_16(decimalVal.toString(2));
+        document.getElementById("floatingBase").value = "2# " + format2(decimalVal.toString(2), base);
         document.getElementById("floatingBaseTen").value = "10# " + decimalVal;
         document.getElementById("floatingBaseEight").value = "8# " + format8(decimalVal.toString(8));
-        document.getElementById("floatingBaseS").value = "16# " +format2_16(decimalVal.toString(16));
+        document.getElementById("floatingBaseS").value = "16# " +format16(decimalVal.toString(16));
     }
     else {
-        document.getElementById("floatingBase").value = "2# -" + format2_16(decimalVal.toString(2));
+        document.getElementById("floatingBase").value = "2# -" + format2(decimalVal.toString(2), base);
         document.getElementById("floatingBaseTen").value = "10# -" + decimalVal;
         document.getElementById("floatingBaseEight").value = "8# -" + format8(decimalVal.toString(8));
-        document.getElementById("floatingBaseS").value = "16# -" +format2_16(decimalVal.toString(16));
+        document.getElementById("floatingBaseS").value = "16# -" +format16(decimalVal.toString(16));
     }
-    document.getElementById("onesComplement").value = format2_16(bit16(onesComplement(decimalVal.toString(2))));  
-    document.getElementById("ascii").value = ascii(decimalVal); 
-    document.getElementById("twosComplement").value = format2_16(bit16(twosComplement(decimalVal)));
-    document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
-    document.getElementById("signedInt").value = signedInt(decimalVal);
-    document.getElementById("base64").value = base64(decimalVal);
+    if (decimalVal.toString(2).length < 16) {
+        document.getElementById("onesComplement").value = format16(bit16(onesComplement(decimalVal.toString(2))));  
+        document.getElementById("ascii").value = ascii(decimalVal); 
+        document.getElementById("twosComplement").value = format16(bit16(twosComplement(decimalVal)));
+        document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
+        document.getElementById("signedInt").value = signedInt(decimalVal);
+        document.getElementById("base64").value = base64(decimalVal);
+    }
+    else invalid16();
+    
 }                 
 function ascii(decimalVal){
     var hex = decimalVal.toString(16);
@@ -233,7 +237,15 @@ function invalidInput() {
     document.getElementById("twosComplement").value = "invalid number";
     document.getElementById("UnsignedInt").value = "invalid number";
     document.getElementById("signedInt").value = "invalid number";
-    //document.getElementById("base64").value="invalid number";
+    document.getElementById("base64").value="invalid number";
+}
+function invalid16() {
+    document.getElementById("ascii").value = "Limit Exceeded";
+    document.getElementById("onesComplement").value = "Limit Exceeded";
+    document.getElementById("twosComplement").value = "Limit Exceeded";
+    document.getElementById("UnsignedInt").value = "Limit Exceeded";
+    document.getElementById("signedInt").value = "Limit Exceeded";
+    document.getElementById("base64").value= "Limit Exceeded";
 }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
@@ -258,7 +270,22 @@ function isHex(numVal) {
     }
     else return false;
 }
-function format2_16(strBase2) {
+function format2(strBase2, baseVal) {
+    var res = "";
+    switch(baseVal) {
+        case "8#":
+            res = format8(strBase2);
+            break;
+        case "2#":
+        case "16#":
+        case "10#":
+        default: 
+            res = format16(strBase2);
+    }
+    return res; 
+}
+
+function format16(strBase2) {
     var formattedStr = "";
     if (strBase2.length <= 4) {
         formattedStr += '0'.repeat(4 - strBase2.length) + strBase2;
