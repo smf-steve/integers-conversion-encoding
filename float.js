@@ -44,7 +44,7 @@ function floatConvert() {
       document.getElementById("2base32").innerHTML = base2;
 
       // converting into conventional scientific notation. 
-      var base2scien = scien.substr(0, scien.indexOf('e')) + ' X 2^ ';
+      var base2scien = scien.substr(0, scien.indexOf('e')) + ' × 2^ ';
       var exp = scien.substr(scien.indexOf('e')+1);
       base2scien += parseInt(exp).toString(2) + ' (' + exp +')';
 
@@ -66,8 +66,8 @@ function floatConvert() {
       document.getElementById("bias16").innerHTML = bias16; // write bias 
       document.getElementById("bias16-2").innerHTML = bias16;
       bias16 = bias16.toString(2);
-      document.getElementById("2bias16").innerHTML = bias16; // write bias in base2
-      document.getElementById("2bias16-2").innerHTML = bias16;
+      document.getElementById("2bias16").innerHTML = formatBias(bias16, "16"); // write bias in base2
+      document.getElementById("2bias16-2").innerHTML = formatBias(bias16, "16");
 
       document.getElementById("bias16size").innerHTML = bias16.length;
      if (bias16.length > 5 || exp < -14) {
@@ -88,8 +88,8 @@ function floatConvert() {
       document.getElementById("bias32").innerHTML = bias32; // write bias 
       document.getElementById("bias32-2").innerHTML = bias32;
       bias32 = bias32.toString(2);
-      document.getElementById("2bias32").innerHTML = bias32; // write bias in base2
-      document.getElementById("2bias32-2").innerHTML = bias32;
+      document.getElementById("2bias32").innerHTML = formatBias(bias32, "32"); // write bias in base2
+      document.getElementById("2bias32-2").innerHTML = formatBias(bias32, "32");
 
       document.getElementById("bias32size").innerHTML = bias32.length;
       if (bias32.length > 8 || exp < -126) {
@@ -118,7 +118,7 @@ function floatConvert() {
           }
         }
   
-        outputVal += format(parseInt(decVal, base).toString(2));
+        outputVal += parseInt(decVal, base).toString(2);
         outputVal += '.';
         outputVal += '0'.repeat(4*counter);
         for (let i = counter; i < floatVal.length; i++) {

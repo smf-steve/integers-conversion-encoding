@@ -188,7 +188,7 @@ function validInput(decimalVal, base) {
         document.getElementById("floatingBaseEight").value = "8# -" + format8(decimalVal.toString(8));
         document.getElementById("floatingBaseS").value = "16# -" +format16(decimalVal.toString(16));
     }
-    if (decimalVal.toString(2).length < 16) {
+    if (decimalVal.toString(2).length <= 16) {
         document.getElementById("onesComplement").value = format16(bit16(onesComplement(decimalVal.toString(2))));  
         document.getElementById("ascii").value = ascii(decimalVal); 
         document.getElementById("twosComplement").value = format16(bit16(twosComplement(decimalVal)));
