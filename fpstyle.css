@@ -261,8 +261,8 @@
   letter-spacing: 0;
 }
 
-.yellow-bg {
-  background-color: #ebe6bd;
+.border-weight {
+  border: solid 3px;
 }
 
 .grey-bg {
