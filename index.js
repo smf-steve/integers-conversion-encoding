@@ -1,4 +1,5 @@
-
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -66,7 +67,7 @@ animate();
 // Whenever page refreshes or is opened, takes user straight to integer conversion
 document.addEventListener("DOMContentLoaded", function() {
     console.log(window.visualViewport.width);
-    var text = "Integer Conversion & Encoding";
+    var text = "Integer Conversion and Encoding";
     function typeText(text, i){
         if(i < text.length){
             document.querySelector('#head').innerHTML = text.substring(0, i+1) 
@@ -93,9 +94,16 @@ let binaryStr;
 let binaryVal, ele;
 let binaryValue = decimalToBinary(decimalValue);
 let element = document.getElementById("conversionSteps");
+let decArr = '';
+let strOut = [];
+let count = 0;
 
 function convert() {
+    strOut = [];
+    decArr = '';
+    count = 0;
     i = -1;
+    binArr = [];
     precision = 8; // the number of floating places considered 
     binaryStr = ""; // final binary value for the decimal conversion
     var rawVal = document.getElementById("floatingInputVal").value;
@@ -441,17 +449,29 @@ function base64(decVal){
     }
     return steps;
   }
-  
+
   function displayStep(step) {
+        count++;
       let html = '';
-      console.log(step);
+  //    console.log(step);
       let parts = step.split('/ 2');
-      console.log(parts);
+      let ans = step.split(', ');
+      console.log(ans[1]);
+      strOut.push(ans[1]);
+      console.log(strOut);
+  //    console.log(parts);
       html += '<div class="step">';
       html += '<span>' + parts[0] + ' / 2</span>';
       html += '<span>' + parts[1] + '</span>';
       html += '</div>';
-    $("#conversionSteps").append(html);
+      if(count % 4 == 0){
+        strOut.push(" ");
+      }
+      let temp = [...strOut].reverse();
+      console.log("here: " + strOut);
+
+      $("#outputBin").empty().append(temp.join(''));
+      $("#conversionSteps").append(html);
   }
 
   function binaryToDecimal(binary) {
@@ -475,11 +495,14 @@ function base64(decVal){
       let html = '';
       console.log(step);
       let parts = step.split('* 2');
+      let ans = step.split("= ");
+      decArr = ans[1];
       console.log(parts);
       html += '<div class="step">';
       html += '<span>' + parts[0] + ' * 2</span>';
       html += '<span>' + parts[1] + '</span>';
       html += '</div>';
+      $("#outputDec").empty().append("Answer: " + decArr);
     $("#secConversionSteps").append(html);
   } 
   $(document).ready(function() {
@@ -887,12 +910,48 @@ function toDecimal(binNum) {
 
 // Fluff, please leave for me - Luis
 /* 
+            <div>
+                <a href="#" data-bs-toggle="tooltip" data-bs-title="Luis Olmos &#010; Victoria Miteva &#010; Vaishnavi Sen &#010; Henry &#010;">Developers</a>
+            </div>
+
                 <div class="col w-50">
                     <div class="card top bg-light border-0">
                         <div class="card-body">
                             <h5 class="card-header text-bg-dark">16-bit Encodings</h5>
                         </div>
                         <div class="row row-cols-1 row-cols-md-2 g-2">
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="UnsignedInt" type="text" value="171" aria-label="Disabled input example" disabled readonly>
+                                        <label for="UnsignedInt">Unsigned Int</label>           
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="signedInt" type="text" value="171" aria-label="Disabled input example" disabled readonly>
+                                        <label for="signedInt">Signed Int</label>           
+                                    </form>
+                                </div>
+                            </div> 
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">        
+                                        <input class="form-control" id="twosComplement" type="text" value="0000 0000 1010 1011" aria-label="Disabled input example" disabled readonly>
+                                        <label for="twosComplement">2s Complement</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="onesComplement" type="text" value="0000 0000 1010 1011" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseEight">1s complement</label>         
+                                    </form>
+                                </div>
+                            </div>
                             <div class="col">
                                 <div class="card bg-light border border-0">
                                     <form class="form-floating">
@@ -908,6 +967,9 @@ function toDecimal(binNum) {
                                     <label for="floatingBaseEight">Base64</label>       </form>                               
                                 </div>
                             </div>
+                        </div>                            
+                    </div>
+                </div>
 
 <header class="masthead">
 <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
