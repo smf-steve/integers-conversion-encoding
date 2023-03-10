@@ -89,9 +89,13 @@ let fractional;
 let precision = 15; // how many times to convert fractional bit
 let i = -1;
 let j;
-let binaryStr = "";
 let isFloat = false;
 let index, val;
+let currnStep, currentStep, decimalValue;
+let binaryStr;
+let binaryVal, ele;
+let binaryValue = decimalToBinary(decimalValue);
+let element = document.getElementById("conversionSteps");
 
 function convert() {
     i = -1;
@@ -103,13 +107,15 @@ function convert() {
     var num = rawVal.substr((rawVal.indexOf("#") + 1 || rawVal.indexOf("x") + 1 || rawVal.indexOf("o") + 1 || rawVal.indexOf("b") + 1),);
     i = -1, j = -1;
     index = 0, val = 0;
+    currnStep = -1, currentStep = -1;
     switch (base) {
         case "2#":
         case "0b":
             if (isBinary(num)) {
                 var decVal = parseInt(num, 2);
                 cDec = decNum = decVal;
-                validInput(decVal, base);
+                decimalValue = decVal;
+                validInput(decVal);
             }
             else invalidInput();
             break;
@@ -118,7 +124,9 @@ function convert() {
             if (isOctal(num)) {
                 var decVal = parseInt(num, 8);
                 cDec = decNum = decVal;
-                validInput(decVal, base);
+                decimalValue = decVal;
+
+                validInput(decVal);
             }
             else invalidInput();
             break;
@@ -138,6 +146,8 @@ function convert() {
                 console.log("TT: " + decVal);
                 decVal = BigInt(decVal);
                 cDec = decNum = decVal;
+                decimalValue = decVal;
+
                 //var decVal = num.toString(16);
                 //var decVal = parseInt(num,16);
                 validInput(decVal, base);
@@ -147,6 +157,8 @@ function convert() {
         case "10#":
         default:
             var decVal = parseInt(num, 10);
+            decimalValue = decVal;
+
             let floatVal = parseFloat(num);
             if(typeof floatVal == "number"){
                 fractional = floatVal - decVal;
@@ -167,6 +179,7 @@ function convert() {
                     isFloat = true;
                 }
             }
+       // decimalValue = cDec; // set your decimal value here
             if (Number.isInteger(decVal)) {
                 cDec = decNum = decVal;
                 validInput(decVal, base);
@@ -174,6 +187,12 @@ function convert() {
             else invalidInput();
             break;
     }
+     binaryValue = decimalToBinary(decimalValue);
+     element = document.getElementById("conversionSteps");
+     binaryVal = binaryStr; // set your binary value here
+     decimalVal = binaryToDecimal(binaryVal);
+     console.log("hi");
+     ele = document.getElementById("secConversionSteps");
 }   
 function validInput(decimalVal, base) {
     if (!neg(document.getElementById("floatingInputVal").value)) {
@@ -189,12 +208,12 @@ function validInput(decimalVal, base) {
         document.getElementById("floatingBaseS").value = "16# -" +format16(decimalVal.toString(16));
     }
     if (decimalVal.toString(2).length <= 16) {
-        document.getElementById("onesComplement").value = format16(bit16(onesComplement(decimalVal.toString(2))));  
-        document.getElementById("ascii").value = ascii(decimalVal); 
-        document.getElementById("twosComplement").value = format16(bit16(twosComplement(decimalVal)));
-        document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
-        document.getElementById("signedInt").value = signedInt(decimalVal);
-        document.getElementById("base64").value = base64(decimalVal);
+        // document.getElementById("onesComplement").value = format16(bit16(onesComplement(decimalVal.toString(2))));  
+        // document.getElementById("ascii").value = ascii(decimalVal); 
+        // document.getElementById("twosComplement").value = format16(bit16(twosComplement(decimalVal)));
+        // document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
+        // document.getElementById("signedInt").value = signedInt(decimalVal);
+        // document.getElementById("base64").value = base64(decimalVal);
     }
     else invalid16();
     
@@ -402,188 +421,321 @@ function base64(decVal){
     return result;
 }
 
+  function decimalToBinary(decimal) {
+    let binary = [];
+    if(currentStep == -1){
+        $("#stepButton").prop("disabled", false); // disable button when all steps are shown
+        $("#secStepButton").prop("disabled",false);
+    }
+    binaryStr = binary;
+    let temp = decimal;
+    while (temp > 0) {
+      binary.unshift(temp % 2);
+      temp = Math.floor(temp / 2);
+    }
+    if (binary.length === 0) {
+      binary.push(0);
+    }
+    let steps = [];
+    for (let i = 0; i <= binary.length; i++) {
+      let step = decimal + " / 2 = " + Math.floor(decimal / 2) + ", " + decimal % 2;
+      steps.push(step);
+      decimal = Math.floor(decimal / 2);
+    }
+    return steps;
+  }
+  
+  function displayStep(step) {
+      let html = '';
+      console.log(step);
+      let parts = step.split('/ 2');
+      console.log(parts);
+      html += '<div class="step">';
+      html += '<span>' + parts[0] + ' / 2</span>';
+      html += '<span>' + parts[1] + '</span>';
+      html += '</div>';
+    $("#conversionSteps").append(html);
+  }
+
+  function binaryToDecimal(binary) {
+    let decimal = 0;
+    let stepTwo = []
+
+    for (let i = 0; i < binary.length; i++) {
+      let digit = binary[i];
+      let step = `${decimal} * 2 + ${digit} = ${decimal*2+digit}`;
+      stepTwo.push(step);
+      decimal = decimal * 2 + digit;
+      console.log(decimal);
+    }
+  
+   // stepTwo.push(`= ${decimal}`);
+  
+    return stepTwo;
+  }
+  
+  function displayStepAlso(step) {
+      let html = '';
+      console.log(step);
+      let parts = step.split('* 2');
+      console.log(parts);
+      html += '<div class="step">';
+      html += '<span>' + parts[0] + ' * 2</span>';
+      html += '<span>' + parts[1] + '</span>';
+      html += '</div>';
+    $("#secConversionSteps").append(html);
+  } 
+  $(document).ready(function() {
+        $("#stepButton").on("click", function() {
+          currentStep++;
+          if(currentStep == 0){
+            element.innerHTML = '';
+          }
+          if (currentStep >= binaryValue.length) {
+            $("#stepButton").prop("disabled", true); // disable button when all steps are shown
+            return;      
+          }
+    
+          displayStep(binaryValue[currentStep]);
+        });
+      
+
+        $("#secStepButton").on("click", function() {
+          currnStep++;
+          if(currnStep == 0){
+            ele.innerHTML = '';
+          }
+          if (currnStep >= binaryVal.length) {
+            $("#secStepButton").prop("disabled", true); // disable button when all steps are shown
+            return;      
+          }
+    
+          displayStepAlso(decimalVal[currnStep]);
+        });
+       
+    
+  });
+  
+  
 let divWidth;
 let secDivWidth;
 let fontSize;
-function stepBy(){
-    if(isFloat){
-        let ele = document.getElementById("decimalCol");
-        let posInfo = ele.getBoundingClientRect();
-        divWidth = posInfo.width;
-        ele = document.getElementById("fractionCol");
-        posInfo = ele.getBoundingClientRect();
-        secDivWidth = posInfo.width;
-        fontSize = 1;
-        if(Number.isInteger(cDec) && i == -1){
-            // Adding decimal to binary content
-            let divEle = document.createElement("div");
-            divEle.setAttribute("id", "temp2");
-            divEle.classList.add("div-cols");
-            let spanEle = document.createElement("span");
-            spanEle.append(`${cDec} `);
-            divEle.append(spanEle);
-            divEle.append(`/ `);
-            let spanEle2 = document.createElement("span");
-            spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
-            divEle.append(spanEle2);
-            decimalCol.replaceChildren(divEle);
-            let tempDi = document.getElementById("temp2");
-            posInfo = tempDi.getBoundingClientRect();
-            let otherDiv = posInfo.width;
-            while(otherDiv > divWidth){
-                fontSize -= 0.088;
-                tempDi.style.fontSize = (fontSize) + "rem";
-                tempDi = document.getElementById("temp2");
-                posInfo = tempDi.getBoundingClientRect();
-                otherDiv = posInfo.width;            
-            }
-            cDec = Math.floor(cDec/2);  
+// $(document).ready(function() {
+//     let decimalValue = 123; // set your decimal value here
+//     let binaryValue = decimalToBinary(decimalValue);
+//     let currentStep = -1;
+    
+//     $("#stepButton").on("click", function() {
+//       currentStep++;
+//       if (currentStep >= binaryValue.length) {
 
-            // Adding fractional to binary content
-            precision--;
-            divEle = document.createElement("div");
-            divEle.setAttribute("id", "temp00");
-            divEle.classList.add("div-cols-2");
-            spanEle = document.createElement("span");
-            spanEle2 = document.createElement("span");
-            let orig = fractional;
-            orig = Math.round(orig * 1e8) / 1e8;
-            fractional *= 2;
-            let fract_bit = parseInt(fractional, 10);
-            if(fract_bit == 1){
-                fractional -= fract_bit;
-                fractional = Math.round(fractional * 1e8) / 1e8;
-                let places = decimalPlaces(fractional);
-                spanEle.append(`${fract_bit}, ${fractional * places}`);  
-                divEle.append(spanEle);
-                divEle.append("= ");
-                places = decimalPlaces(orig);
-                spanEle2.append(`${orig*places} * 2`);
-                divEle.append(spanEle2);
-                fractionCol.replaceChildren(divEle);        
-            }else{
-                fractional = Math.round(fractional * 1e8) / 1e8;
-                let places = decimalPlaces(fractional);
-                spanEle.append(`${fract_bit}, ${fractional * places}`);  
-                divEle.append(spanEle);
-                divEle.append("= ");
-                places = decimalPlaces(orig);
-                spanEle2.append(`${orig*places} * 2`);
-                divEle.append(spanEle2);
-                fractionCol.replaceChildren(divEle);                 
-            }
-            tempDi = document.getElementById("temp00");
-            posInfo = tempDi.getBoundingClientRect();
-            otherDiv = posInfo.width;
-            while(otherDiv > secDivWidth){
-                fontSize -= 0.088;
-                tempDi.style.fontSize = (fontSize) + "rem";
-                tempDi = document.getElementById("temp00");
-                posInfo = tempDi.getBoundingClientRect();
-                otherDiv = posInfo.width;            
-            }        
-            i++;  
-        }
-        else if(Number.isInteger(cDec) && i == 0){
-            decToBinary(cDec);
-            fracToBinary(fractional);
-            precision--;
-            cDec = Math.floor(cDec/2);
-        }
-        else if(Number.isInteger(cDec) && precision > 0){
-            fracToBinary(fractional);
-            precision--;
-        }
-    } else {
-        if(Number.isInteger(cDec) && i == -1){
-           // stepOne.replaceChildren(document.createElement("span"));
-            let divEle = document.createElement("div");
-            divEle.setAttribute("id", "temp");
-            let spanEle = document.createElement("span");
-            spanEle.append(`${cDec} `);
-            divEle.append(spanEle);
-            divEle.append(`/ `);
-            let spanEle2 = document.createElement("span");
-            spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
-            divEle.append(spanEle2);
-            stepOne.replaceChildren(divEle);
+//         $("#stepButton").prop("disabled", true); // disable button when all steps are shown
+//         return;
+//       }
+//       $("#conversionSteps").append("<div>" + binaryValue[currentStep] + "</div>");
+//     });
+  
+//     function decimalToBinary(decimal) {
+//       let binary = [];
+//       let temp = decimal;
+//       while (temp > 0) {
+//         binary.unshift(temp % 2);
+//         temp = Math.floor(temp / 2);
+//       }
+//       if (binary.length === 0) {
+//         binary.push(0);
+//       }
+//       let steps = [];
+//       for (let i = 0; i <= binary.length; i++) {
+//         let step = decimal + " / 2 = " + Math.floor(decimal / 2) + ", " + decimal % 2;
+//         steps.push(step);
+//         decimal = Math.floor(decimal / 2);
+//       }
+//       console.log(steps);
 
-          //  stepOne.append(linebreak);
-            cDec = Math.floor(cDec/2);  
-            i++;  
-        }
-        else if (Number.isInteger(cDec) && i == 0){
-            toBinary(cDec);
-            cDec = Math.floor(cDec/2);
-           // console.log(cDec);
-        }
-    }
-}
+//       return steps;
+//     }
+//   });
 
-function decimalPlaces(dec){
-    if(!isFinite(dec)) return 1;
-    let temp = 1, count = 1;
-    while(Math.round(dec * temp) / temp !== dec){
-        temp *= 10;
-        count *= 10;
-    }
-    if(count == 10){
-        count *= 10;
-    }
-    return count;
-}
-let idTag = "3";
-function decToBinary(num){
-    if(num == 0 && i == 0){
-        let divEle = document.createElement("div");
-        divEle.setAttribute("id", idTag);
-        divEle.classList.add("div-cols");
-        let spanEle = document.createElement("span");
-        spanEle.append(`${cDec} `);
-        divEle.append(spanEle);
-        divEle.append(`/ `);
-        let spanEle2 = document.createElement("span");
-        spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
-        divEle.append(spanEle2);
-        decimalCol.append(divEle);
-        let tempDi = document.getElementById(idTag);
-        posInfo = tempDi.getBoundingClientRect();
-        let otherDiv = posInfo.width;
-        while(otherDiv > divWidth){
-            fontSize -= 0.088;
-            tempDi.style.fontSize = (fontSize) + "rem";
-            tempDi = document.getElementById(idTag);
-            posInfo = tempDi.getBoundingClientRect();
-            otherDiv = posInfo.width;            
-        }
-        i++;
-    }
-    else if(i == 0){
-        let divEle = document.createElement("div");
-        divEle.setAttribute("id", idTag);
-        divEle.classList.add("div-cols");
-        let spanEle = document.createElement("span");
-        spanEle.append(`${cDec} `);
-        divEle.append(spanEle);
-        divEle.append(`/ `);
-        let spanEle2 = document.createElement("span");
-        spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
-        divEle.append(spanEle2);
-        decimalCol.append(divEle);
-        let tempDi = document.getElementById(idTag);
-        posInfo = tempDi.getBoundingClientRect();
-        let otherDiv = posInfo.width;
-        while(otherDiv > divWidth){
-            fontSize -= 0.088;
-            tempDi.style.fontSize = (fontSize) + "rem";
-            tempDi = document.getElementById(idTag);
-            posInfo = tempDi.getBoundingClientRect();
-            otherDiv = posInfo.width;            
-        }
-        idTag = parseInt(idTag, 10) + 1;
-        idTag = '' + idTag;
-    }
-}
+// function stepBy(){
+//     if(isFloat){
+//         let ele = document.getElementById("decimalCol");
+//         let posInfo = ele.getBoundingClientRect();
+//         divWidth = posInfo.width;
+//         ele = document.getElementById("fractionCol");
+//         posInfo = ele.getBoundingClientRect();
+//         secDivWidth = posInfo.width;
+//         fontSize = 1;
+//         if(Number.isInteger(cDec) && i == -1){
+//             // Adding decimal to binary content
+//             let divEle = document.createElement("div");
+//             divEle.setAttribute("id", "temp2");
+//             divEle.classList.add("div-cols");
+//             let spanEle = document.createElement("span");
+//             spanEle.append(`${cDec} `);
+//             divEle.append(spanEle);
+//             divEle.append(`/ `);
+//             let spanEle2 = document.createElement("span");
+//             spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
+//             divEle.append(spanEle2);
+//             decimalCol.replaceChildren(divEle);
+//             let tempDi = document.getElementById("temp2");
+//             posInfo = tempDi.getBoundingClientRect();
+//             let otherDiv = posInfo.width;
+//             while(otherDiv > divWidth){
+//                 fontSize -= 0.088;
+//                 tempDi.style.fontSize = (fontSize) + "rem";
+//                 tempDi = document.getElementById("temp2");
+//                 posInfo = tempDi.getBoundingClientRect();
+//                 otherDiv = posInfo.width;            
+//             }
+//             cDec = Math.floor(cDec/2);  
+
+//             // Adding fractional to binary content
+//             precision--;
+//             divEle = document.createElement("div");
+//             divEle.setAttribute("id", "temp00");
+//             divEle.classList.add("div-cols-2");
+//             spanEle = document.createElement("span");
+//             spanEle2 = document.createElement("span");
+//             let orig = fractional;
+//             orig = Math.round(orig * 1e8) / 1e8;
+//             fractional *= 2;
+//             let fract_bit = parseInt(fractional, 10);
+//             if(fract_bit == 1){
+//                 fractional -= fract_bit;
+//                 fractional = Math.round(fractional * 1e8) / 1e8;
+//                 let places = decimalPlaces(fractional);
+//                 spanEle.append(`${fract_bit}, ${fractional * places}`);  
+//                 divEle.append(spanEle);
+//                 divEle.append("= ");
+//                 places = decimalPlaces(orig);
+//                 spanEle2.append(`${orig*places} * 2`);
+//                 divEle.append(spanEle2);
+//                 fractionCol.replaceChildren(divEle);        
+//             }else{
+//                 fractional = Math.round(fractional * 1e8) / 1e8;
+//                 let places = decimalPlaces(fractional);
+//                 spanEle.append(`${fract_bit}, ${fractional * places}`);  
+//                 divEle.append(spanEle);
+//                 divEle.append("= ");
+//                 places = decimalPlaces(orig);
+//                 spanEle2.append(`${orig*places} * 2`);
+//                 divEle.append(spanEle2);
+//                 fractionCol.replaceChildren(divEle);                 
+//             }
+//             tempDi = document.getElementById("temp00");
+//             posInfo = tempDi.getBoundingClientRect();
+//             otherDiv = posInfo.width;
+//             while(otherDiv > secDivWidth){
+//                 fontSize -= 0.088;
+//                 tempDi.style.fontSize = (fontSize) + "rem";
+//                 tempDi = document.getElementById("temp00");
+//                 posInfo = tempDi.getBoundingClientRect();
+//                 otherDiv = posInfo.width;            
+//             }        
+//             i++;  
+//         }
+//         else if(Number.isInteger(cDec) && i == 0){
+//             decToBinary(cDec);
+//             fracToBinary(fractional);
+//             precision--;
+//             cDec = Math.floor(cDec/2);
+//         }
+//         else if(Number.isInteger(cDec) && precision > 0){
+//             fracToBinary(fractional);
+//             precision--;
+//         }
+//     } else {
+//         if(Number.isInteger(cDec) && i == -1){
+//            // stepOne.replaceChildren(document.createElement("span"));
+//             let divEle = document.createElement("div");
+//             divEle.setAttribute("id", "temp");
+//             let spanEle = document.createElement("span");
+//             spanEle.append(`${cDec} `);
+//             divEle.append(spanEle);
+//             divEle.append(`/ `);
+//             let spanEle2 = document.createElement("span");
+//             spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
+//             divEle.append(spanEle2);
+//             stepOne.replaceChildren(divEle);
+
+//           //  stepOne.append(linebreak);
+//             cDec = Math.floor(cDec/2);  
+//             i++;  
+//         }
+//         else if (Number.isInteger(cDec) && i == 0){
+//             toBinary(cDec);
+//             cDec = Math.floor(cDec/2);
+//            // console.log(cDec);
+//         }
+//     }
+// }
+
+// // function decimalPlaces(dec){
+// //     if(!isFinite(dec)) return 1;
+// //     let temp = 1, count = 1;
+// //     while(Math.round(dec * temp) / temp !== dec){
+// //         temp *= 10;
+// //         count *= 10;
+// //     }
+// //     if(count == 10){
+// //         count *= 10;
+// //     }
+// //     return count;
+// // }
+// let idTag = "3";
+// function decToBinary(num){
+//     if(num == 0 && i == 0){
+//         let divEle = document.createElement("div");
+//         divEle.setAttribute("id", idTag);
+//         divEle.classList.add("div-cols");
+//         let spanEle = document.createElement("span");
+//         spanEle.append(`${cDec} `);
+//         divEle.append(spanEle);
+//         divEle.append(`/ `);
+//         let spanEle2 = document.createElement("span");
+//         spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
+//         divEle.append(spanEle2);
+//         decimalCol.append(divEle);
+//         let tempDi = document.getElementById(idTag);
+//         posInfo = tempDi.getBoundingClientRect();
+//         let otherDiv = posInfo.width;
+//         while(otherDiv > divWidth){
+//             fontSize -= 0.088;
+//             tempDi.style.fontSize = (fontSize) + "rem";
+//             tempDi = document.getElementById(idTag);
+//             posInfo = tempDi.getBoundingClientRect();
+//             otherDiv = posInfo.width;            
+//         }
+//         i++;
+//     }
+//     else if(i == 0){
+//         let divEle = document.createElement("div");
+//         divEle.setAttribute("id", idTag);
+//         divEle.classList.add("div-cols");
+//         let spanEle = document.createElement("span");
+//         spanEle.append(`${cDec} `);
+//         divEle.append(spanEle);
+//         divEle.append(`/ `);
+//         let spanEle2 = document.createElement("span");
+//         spanEle2.append(`2 = ${Math.floor(cDec/2)}, ${cDec%2}`);
+//         divEle.append(spanEle2);
+//         decimalCol.append(divEle);
+//         let tempDi = document.getElementById(idTag);
+//         posInfo = tempDi.getBoundingClientRect();
+//         let otherDiv = posInfo.width;
+//         while(otherDiv > divWidth){
+//             fontSize -= 0.088;
+//             tempDi.style.fontSize = (fontSize) + "rem";
+//             tempDi = document.getElementById(idTag);
+//             posInfo = tempDi.getBoundingClientRect();
+//             otherDiv = posInfo.width;            
+//         }
+//         idTag = parseInt(idTag, 10) + 1;
+//         idTag = '' + idTag;
+//     }
+// }
 let idTag2 = "0";
 function fracToBinary(num){
     if(precision != 0){
@@ -663,6 +815,51 @@ function toBinary(n){
     }
 };
 
+$(document).ready(function() {
+    // let binaryValue = 010110; // set your binary value here
+    // let decimalValue = binaryToDecimal(binaryValue);
+    // let currentStep = -1;
+    // let element = document.getElementById("secConversionSteps");
+    // $("#secStepButton").on("click", function() {
+    //   currentStep++;
+    //   if(currentStep == 0){
+    //     element.innerHTML = '';
+    //   }
+    //   if (currentStep >= binaryValue.length) {
+    //     $("#secStepButton").prop("disabled", true); // disable button when all steps are shown
+    //     return;      
+    //   }
+
+    //   displayStepAlso(decimalValue[currentStep]);
+    // });
+  
+    // function binaryToDecimal(binary) {
+    //   let decimal = 0;
+    //   for (let i = binary.length - 1; i >= 0; i--) {
+    //     const lastDigit = binary[i];
+    //     const step = `${lastDigit} * 2^${binary.length - 1 - i} = ${lastDigit * Math.pow(2, binary.length - 1 - i)}`;
+    //     steps.push(step);
+    //     decimal += lastDigit * Math.pow(2, binary.length - 1 - i);
+    //   }
+    
+    //   steps.push(`= ${decimal}`);
+    
+    //   return steps;
+    // }
+    
+    // function displayStepAlso(step) {
+    //     let html = '';
+    //     console.log(step);
+    //     let parts = step.split('* 2');
+    //     console.log(parts);
+    //     html += '<div class="step">';
+    //     html += '<span>' + parts[0] + ' * 2</span>';
+    //     html += '<span>' + parts[1] + '</span>';
+    //     html += '</div>';
+    //   $("#conversionSteps").append(html);
+    // }
+  });
+
 function stepDec(){
     decNum = decNum.toString(2);
     if (j == -1) {
@@ -692,7 +889,30 @@ function toDecimal(binNum) {
 
 
 // Fluff, please leave for me - Luis
-/* <header class="masthead">
+/* 
+                <div class="col w-50">
+                    <div class="card top bg-light border-0">
+                        <div class="card-body">
+                            <h5 class="card-header text-bg-dark">16-bit Encodings</h5>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-2 g-2">
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                        <input class="form-control" id="ascii" type="text" value="invalid number" aria-label="Disabled input example" disabled readonly>
+                                        <label for="ascii">ASCII</label>           
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card bg-light border border-0">
+                                    <form class="form-floating">
+                                    <input class="form-control" id="base64" type="text" value="Cr" aria-label="Disabled input example" disabled readonly>
+                                    <label for="floatingBaseEight">Base64</label>       </form>                               
+                                </div>
+                            </div>
+
+<header class="masthead">
 <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
     <div class="d-flex justify-content-center">
         <div class="text-center">
