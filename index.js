@@ -92,7 +92,7 @@ let index, val;
 let currnStep, currentStep, decimalValue;
 let binaryStr;
 let binaryVal, ele;
-let binaryValue = decimalToBinary(decimalValue);
+let binaryValue;
 let element = document.getElementById("conversionSteps");
 let decArr = '';
 let strOut = [];
