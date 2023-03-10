@@ -75,10 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 typeText(text, i + 1)
             }, 130);
         }else{
-            setTimeout(function(){
-                window.location.hash = '';
-                window.location.hash = '#integer';
-            }, 200);
+            setTimeout(function(){}, 200);
         }
     }
     typeText(text, 0);
