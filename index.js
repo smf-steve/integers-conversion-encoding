@@ -120,7 +120,7 @@ function convert() {
                 var decVal = parseInt(num, 2);
                 cDec = decNum = decVal;
                 decimalValue = decVal;
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
@@ -131,7 +131,7 @@ function convert() {
                 cDec = decNum = decVal;
                 decimalValue = decVal;
 
-                validInput(decVal);
+                validInput(decVal, base);
             }
             else invalidInput();
             break;
@@ -212,15 +212,15 @@ function validInput(decimalVal, base) {
         document.getElementById("floatingBaseEight").value = "8# -" + format8(decimalVal.toString(8));
         document.getElementById("floatingBaseS").value = "16# -" +format16(decimalVal.toString(16));
     }
-    if (decimalVal.toString(2).length <= 16) {
+    // if (decimalVal.toString(2).length <= 16) {
         // document.getElementById("onesComplement").value = format16(bit16(onesComplement(decimalVal.toString(2))));  
         // document.getElementById("ascii").value = ascii(decimalVal); 
         // document.getElementById("twosComplement").value = format16(bit16(twosComplement(decimalVal)));
         // document.getElementById("UnsignedInt").value = unsignedInt(decimalVal);
         // document.getElementById("signedInt").value = signedInt(decimalVal);
         // document.getElementById("base64").value = base64(decimalVal);
-    }
-    else invalid16();
+    // }
+    // else invalid16();
     
 }                 
 function ascii(decimalVal){
@@ -263,14 +263,14 @@ function invalidInput() {
     document.getElementById("signedInt").value = "invalid number";
     document.getElementById("base64").value="invalid number";
 }
-function invalid16() {
-    document.getElementById("ascii").value = "Limit Exceeded";
-    document.getElementById("onesComplement").value = "Limit Exceeded";
-    document.getElementById("twosComplement").value = "Limit Exceeded";
-    document.getElementById("UnsignedInt").value = "Limit Exceeded";
-    document.getElementById("signedInt").value = "Limit Exceeded";
-    document.getElementById("base64").value= "Limit Exceeded";
-}
+// function invalid16() {
+//     document.getElementById("ascii").value = "Limit Exceeded";
+//     document.getElementById("onesComplement").value = "Limit Exceeded";
+//     document.getElementById("twosComplement").value = "Limit Exceeded";
+//     document.getElementById("UnsignedInt").value = "Limit Exceeded";
+//     document.getElementById("signedInt").value = "Limit Exceeded";
+//     document.getElementById("base64").value= "Limit Exceeded";
+// }
 function isBinary(numVal) {
     for (let i = 0; i < numVal.length; i++) {
         if (numVal[i] != 0 && numVal[i] != 1) {
