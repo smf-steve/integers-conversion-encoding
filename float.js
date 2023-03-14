@@ -1,4 +1,5 @@
 function floatConvert() {
+    setDeafult();
     // getting input value 
     var inVal = document.getElementById("inp").value;
     var base2 = "", scien = "";
@@ -40,16 +41,23 @@ function floatConvert() {
           scien = parseFloat(base2).toExponential();
       }
 
-      document.getElementById("2base16").innerHTML = base2;
-      document.getElementById("2base32").innerHTML = base2;
+      var temp = document.querySelectorAll("#base2");
+      for (let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = base2;
+      }
 
       // converting into conventional scientific notation. 
       var base2scien = scien.substr(0, scien.indexOf('e')) + ' × 2^ ';
       var exp = scien.substr(scien.indexOf('e')+1);
+      if (exp.indexOf('+') != -1){
+          exp = exp.replace('+', '');
+      }
       base2scien += parseInt(exp).toString(2) + ' (' + exp +')';
 
-      document.getElementById("2scien16").innerHTML = base2scien;
-      document.getElementById("2scien32").innerHTML = base2scien;
+      var temp = document.querySelectorAll("#scien2");
+      for (let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = base2scien;
+      }
 
       // sign index 
       var sign;
@@ -57,51 +65,64 @@ function floatConvert() {
       else sign = 0;
 
       // writing the exponents 
-      document.getElementById("exp16").innerHTML = exp;
-      document.getElementById("exp32").innerHTML = exp;
-
+      var temp = document.querySelectorAll("#exp");
+      for (let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = exp;
+      }
       // BINARY 16
       var output, bias16, bin16 = ""; 
       bias16 = (15 + parseInt(exp));
-      document.getElementById("bias16").innerHTML = bias16; // write bias 
-      document.getElementById("bias16-2").innerHTML = bias16;
+      temp = document.querySelectorAll("#bias16");
+      for (let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = bias16;
+      }
       bias16 = bias16.toString(2);
-      document.getElementById("2bias16").innerHTML = formatBias(bias16, "16"); // write bias in base2
-      document.getElementById("2bias16-2").innerHTML = formatBias(bias16, "16");
+      var tmp = document.querySelectorAll("#biasBase2");
+      for (let i = 0; i < tmp.length; i++) {
+        tmp[i].innerHTML = formatBias(bias16, "16");
+      }
 
       document.getElementById("bias16size").innerHTML = bias16.length;
      if (bias16.length > 5 || exp < -14) {
-        document.getElementById("check16").innerHTML = "error";
+        error16();
       } 
       else {
         document.getElementById("check16").innerHTML = "FITS";
         bin16 += sign + ' | ';
         bin16 += formatBias(bias16, "16") + ' | ';
         bin16 += format(mantissa(base2).substr(0,10));
-        document.getElementById("B16").innerHTML = bin16;
-        document.getElementById("bin16-2").innerHTML = bin16;
+        temp = document.querySelectorAll("#B16");
+        for(let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = bin16;
+        }
       }
 
       // Binary 32
       var bias32, bin32 = "";
       bias32 = (127 + parseInt(exp))
-      document.getElementById("bias32").innerHTML = bias32; // write bias 
-      document.getElementById("bias32-2").innerHTML = bias32;
+      var temp = document.querySelectorAll("#bias32");
+      for (let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = bias32;
+      };
       bias32 = bias32.toString(2);
-      document.getElementById("2bias32").innerHTML = formatBias(bias32, "32"); // write bias in base2
-      document.getElementById("2bias32-2").innerHTML = formatBias(bias32, "32");
-
+      temp = document.querySelectorAll("#binaryBias32");
+      for(let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = formatBias(bias32, "32");
+      }
       document.getElementById("bias32size").innerHTML = bias32.length;
       if (bias32.length > 8 || exp < -126) {
-        document.getElementById("check32").innerHTML = "error";
+        error32();
       } 
       else { 
         document.getElementById("check32").innerHTML = "FITS";
         bin32 += sign + ' | ';
         bin32 += formatBias(bias32, "32") + ' | ';
         bin32 += format(mantissa(base2).substr(0,23));
-        document.getElementById("B32").innerHTML = bin32;
-        document.getElementById("bin32-2").innerHTML = bin32;
+
+        temp = document.querySelectorAll("#B32");
+        for(let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = bin32;
+        }
       }
 
 
@@ -145,22 +166,57 @@ function floatConvert() {
   
       // formatting the expoenent in value system
       function formatBias(strBase2, base){
-        var res = "";
+        var res = "", output = "";
         switch (base) {
           case "16": 
             if (strBase2.length <= 5) {
               res += '0'.repeat(5-strBase2.length) + strBase2;
             }
-  
+            else res = strBase2;
             res = res.slice(0, 1) + ' ' + res.slice(1);
             break;
           case "32": 
             if (strBase2.length <= 8) {
               res += '0'.repeat(8-strBase2.length) + strBase2;
             }
+            else res = strBase2;
             res = res.slice(0, 4) + ' ' + res.slice(4);
             break;
         }
         return res; 
+      }
+
+      // handling error for IEEE16
+      function error16() {
+        document.getElementById("check16").innerHTML = "ERROR";
+        document.getElementById("check16").style.color = "red";
+        document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "red";
+        temp = document.querySelectorAll("#B16");
+        for(let i = 0; i < temp.length; i++) {
+          temp[i].style.color = "red";
+          temp[i].innerHTML = "ERROR";
+        }
+      }
+
+      // handling error for IEE32
+      function error32() {
+        document.getElementById("check32").innerHTML = "ERROR";
+        document.getElementById("check32").style.color = "red";
+        document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "red";
+        temp = document.querySelectorAll("#B32");
+        for(let i = 0; i < temp.length; i++) {
+          temp[i].style.color = "red";
+          temp[i].innerHTML = "ERROR";
+        }
+      }
+
+      function setDeafult() {
+          document.getElementById("check16").style.color = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
+          temp = document.querySelectorAll("#B16");
+          for(let i = 0; i < temp.length; i++) {
+            temp[i].style.color = "black";
+        }       
       }
 }
