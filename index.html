@@ -12,6 +12,7 @@
         <!-- 7-segement display -->
         <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
                 
+        
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />       
@@ -21,6 +22,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <!-- Three.js CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js" crossorigin="anonymous"></script>
+      
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
         <script>
         window.addEventListener('DOMContentLoaded', event => {
         
@@ -108,126 +112,101 @@
                 </div>
             </div>
 
-            <div class="container text-center bases">
-                <div class="row justify-contenzound">
-                    <div class="col">
-                        <form class="form-floating">             
-                            <input class="form-control" type="text" id="floatingBase" value="2# 1010 1011" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBase">Base 2 (2#)(0b)</label>  
-                        </form>
-                    </div>
 
-                    <div class="col">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseEight" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseEight">Base 8 (8#)(0o)</label>      </form>
-                    </div>
-
-                    <div class="col">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseTen" type="text" value="10# 171" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseTen">Base 10 (Decimal)</label>
-                        </form>
-                    </div>
-
-                    <div class="col">
-                        <form class="form-floating">
-                            <input class="form-control" id="floatingBaseS" type="text" value="16# 00AB" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingBaseS">Base 16 (16#)(0x)</label>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-cols-1 row-cols-md-2 g-2 dec-encode">
-                <div class="col w-50">
-                    <div class="card top bg-light border-0 mar">
-                        <div class="row row-cols-1 row-cols-md-1 g-1 dec-boxes">
-                            <div class="col">
-                                <div class="card border border-4 box bg-light rounded">
-                                    <div class="card-body d-flex flex-column">
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <h6 class="card-title p-2">Decimal to Binary Conversion</h6>
-                                            <button onclick="stepBy()" class="btn btn-outline-dark">Step / Replay</button>
-                                        </div>
-                                        <div class="card-text" id="stepOne">v-- Conversion Below --v</div>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card border border-5 bg-light rounded">
-                                    <div class="card-body d-flex flex-column">
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <h6 class="card-title p-2">Binary to Decimal Conversion</h6>
-                                            <button onclick="stepDec()" class="btn btn-outline-dark">Step / Replay</button>
-                                        </div>
-                                        <div class="card-text" id="divStep">v-- Conversion Below --v</div> 
-                                        <br>
-                                    </div> 
-                                </div>                    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col w-50">
-                    <div class="card top bg-light border-0">
-                        <div class="card-body">
-                            <h5 class="card-header text-bg-dark">16-bit Encodings</h5>
-                        </div>
-                        <div class="row row-cols-1 row-cols-md-2 g-2">
+            <div class="row row-cols-1 row-cols-md-2 g-5 dec-encode" style="margin-top:2%;">
+                <div class="col-md-4 offset-md-1">
+                    <div class="card bg-light border-0">
+                        <div class="row row-cols-1 g-4">
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                        <input class="form-control" id="UnsignedInt" type="text" value="171" aria-label="Disabled input example" disabled readonly>
-                                        <label for="UnsignedInt">Unsigned Int</label>           
+                                    <form class="form-floating">             
+                                        <input class="form-control" type="text" id="floatingBase" value="2# 1010 1011" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBase">Base 2 (2#)(0b)</label>  
                                     </form>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="card bg-light border border-0">
                                     <form class="form-floating">
-                                        <input class="form-control" id="signedInt" type="text" value="171" aria-label="Disabled input example" disabled readonly>
-                                        <label for="signedInt">Signed Int</label>           
+                                        <input class="form-control" id="floatingBaseEight" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseEight">Base 8 (8#)(0o)</label>    
                                     </form>
                                 </div>
                             </div> 
                             <div class="col">
                                 <div class="card bg-light border border-0">
-                                    <form class="form-floating">        
-                                        <input class="form-control" id="twosComplement" type="text" value="0000 0000 1010 1011" aria-label="Disabled input example" disabled readonly>
-                                        <label for="twosComplement">2s Complement</label>
+                                    <form class="form-floating">
+                                        <input class="form-control" id="floatingBaseTen" type="text" value="10# 171" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseTen">Base 10 (Decimal)</label>
                                     </form>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="card bg-light border border-0">
                                     <form class="form-floating">
-                                        <input class="form-control" id="onesComplement" type="text" value="0000 0000 1010 1011" aria-label="Disabled input example" disabled readonly>
-                                        <label for="floatingBaseEight">1s complement</label>         
+                                        <input class="form-control" id="floatingBaseS" type="text" value="16# 00AB" aria-label="Disabled input example" disabled readonly>
+                                        <label for="floatingBaseS">Base 16 (16#)(0x)</label>
                                     </form>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                        <input class="form-control" id="ascii" type="text" value="invalid number" aria-label="Disabled input example" disabled readonly>
-                                        <label for="ascii">ASCII</label>           
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                    <input class="form-control" id="base64" type="text" value="Cr" aria-label="Disabled input example" disabled readonly>
-                                    <label for="floatingBaseEight">Base64</label>       </form>                               
                                 </div>
                             </div>
                         </div>                            
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card bg-light border-0">
+                            <div class="col">
+                                <div class="card border border-4 box bg-light rounded">
+                                    <div class="card-body d-flex flex-column">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <h6 class="card-title p-2 text-center">Decimal to Binary Conversion</h6>
+                                        </div>
+                                        <button id="stepButton" class="btn btn-outline-dark" style="width: 75%; align-self: center;">Step / Replay</button>
+                                        <div id="outputBin" class="text-center fw-bold">
+
+                                        </div>
+                                        <div class="card-text" id="conversionSteps">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4">
+                    <div class="col">
+
+                    <div class="card border border-5 bg-light rounded">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex flex-row justify-content-between">
+                                <h6 class="card-title p-2 text-center">Binary to Decimal Conversion</h6>
+                            </div>
+                            <button id="secStepButton" class="btn btn-outline-dark"style="width: 75%; align-self: center;">Step / Replay</button>
+                            <div id="outputDec" class="text-center fw-bold">
+                            </div>
+                            <div class="card-text" id="secConversionSteps">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        </div> 
+                    </div>
+                    </div>                    
+                </div>
             </div>
+            
         </div>
         </section>
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
