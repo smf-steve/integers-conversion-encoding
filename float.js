@@ -2,14 +2,13 @@ function floatConvert() {
     setDeafult();
     // getting input value 
     var inVal = document.getElementById("inp").value;
-    var base2 = "", scien = "";
-    baseVal = inVal.substr(0, inVal.indexOf('#')+1);
+    var base2 = "", scien = "", base;
+    var baseVal = inVal.substr(0, inVal.indexOf('#')+1);
     inVal = inVal.substr(inVal.indexOf('#')+1);
 
     // setting the negative status 
-    var negStat; 
+    var negStat = false; 
     if (inVal.indexOf('-') != -1) negStat = true;
-    else negStat = false; 
 
     // getting rid of the minus sign from inval 
     inVal = inVal.replace('-', '');
@@ -19,8 +18,8 @@ function floatConvert() {
         // temp stores the base2 string. 
         case "2#":
         case "0b":
-          base2 = inVal;
-          scien = parseFloat(base2).toExponential();
+          base2 = inVal; 
+         scien = parseFloat(base2).toExponential();
           break;
         
         case "8#":
@@ -28,12 +27,12 @@ function floatConvert() {
           base2 = baseConvert(inVal, 8);
           scien = parseFloat(base2).toExponential();
           break;
-        
+
         case "16#":
         case "0x":
           base2 = baseConvert(inVal, 16);
           scien = parseFloat(base2).toExponential();
-          break;
+          break; 
 
         case "10#": 
         default: 
@@ -41,6 +40,7 @@ function floatConvert() {
           scien = parseFloat(base2).toExponential();
       }
 
+      // document.getElementById("base2").innerHTML = base2;
       var temp = document.querySelectorAll("#base2");
       for (let i = 0; i < temp.length; i++) {
         temp[i].innerHTML = base2;
@@ -126,26 +126,49 @@ function floatConvert() {
       }
 
 
-    function baseConvert(inputVal, base) {
-        var outputVal = "", outputFloat = "", i = 0, counter=0;
-  
-        var decVal = inputVal.substr(0, inputVal.indexOf('.'));
-        var floatVal = inputVal.substr(inputVal.indexOf('.')+ 1);
-  
-        if (floatVal.charAt(0) == 0) {
-          while (floatVal.charAt(i) == 0) {
-            counter++;
-            i++;
+    function baseConvert(inputVal, base) {   
+      inputVal = inputVal.replace(" ", '');
+        var outputVal = "", outputFloat = "", i = 0, counter=0, decVal, floatVal;
+        if (inputVal != "") {
+          if (inputVal.indexOf('.') == -1) {
+            decVal = inputVal;
+            floatVal = "0".repeat(4);
           }
+          else {
+            decVal = inputVal.substr(0, inputVal.indexOf('.'));
+            floatVal = inputVal.substr(inputVal.indexOf('.')+ 1);
+
+            if (decVal != "" && floatVal != "") {
+              if (floatVal.charAt(0) == 0) {
+                    while (floatVal.charAt(i) == 0 && i < floatVal.length) {
+                      counter++;
+                      i++;
+                    }
+                  }
+            }
+          }
+
+          outputVal += parseInt(decVal, base).toString(2);
+          outputVal += '.';
+          outputVal += '0'.repeat(4*counter); 
+          for (let i = counter; i < floatVal.length; i++) {
+            outputFloat += format(parseInt(floatVal.charAt(i), base).toString(2));
+          }
+          outputVal += outputFloat;
         }
-  
-        outputVal += parseInt(decVal, base).toString(2);
-        outputVal += '.';
-        outputVal += '0'.repeat(4*counter);
-        for (let i = counter; i < floatVal.length; i++) {
-          outputFloat += format(parseInt(floatVal.charAt(i), base).toString(2));
-        }
-        outputVal += outputFloat;
+          
+        // if (decVal != "" || floatVal != "") {
+       
+
+        //   // if (floatVal.charAt(0) == 0) {
+        //   //   while (floatVal.charAt(i) == 0) {
+        //   //     counter++;
+        //   //     i++;
+        //   //   }
+        //   // } 
+        // }
+        
+        
         return outputVal;
       }
   
