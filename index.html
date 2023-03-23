@@ -84,8 +84,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="floating-points.html">Float Conversion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#integer">Integer Conversion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="integer-conversion.html">Integer Conversion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
                         <li class="nav-item"><a class="nav-link" href="conversion-sheets.html">More Resources</a></li>
                     </ul>
                 </div>
@@ -95,120 +95,9 @@
         <header class="masthead">         
                         <canvas id="bg"></canvas>
                         <div class="mx-auto my-0 text-uppercase" id="head"></div>
-                        <a class="btn btn-outline-light" href="#integer">To Conversion</a>
+                        <a class="btn btn-outline-light" href="integer-conversion.html">To Conversion</a>
         </header>
 
-        <!-- Integer Conversion -->
-        <section id="integer">
-        <div class="container bg-light section">  
-            <div>
-                <div>
-                    <form class="input" onsubmit="return false">
-                        <div class="form-floating mb-3 mt-3 ml-auto gx-1">
-                            <input type="text" id="floatingInputVal" class="form-control" placeholder="2# 1010 1011" value="2# 1010 1011" oninput="convert()">
-                            <label for="floatingInputVal">Input a number</label>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-            <div class="row row-cols-1 row-cols-md-2 g-5 dec-encode" style="margin-top:2%;">
-                <div class="col-md-4 offset-md-1">
-                    <div class="card bg-light border-0">
-                        <div class="row row-cols-1 g-4">
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">             
-                                        <input class="form-control" type="text" id="floatingBase" value="2# 1010 1011" aria-label="Disabled input example" disabled readonly>
-                                        <label for="floatingBase">Base 2 (2#)(0b)</label>  
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                        <input class="form-control" id="floatingBaseEight" type="text" value="8# 253" aria-label="Disabled input example" disabled readonly>
-                                        <label for="floatingBaseEight">Base 8 (8#)(0o)</label>    
-                                    </form>
-                                </div>
-                            </div> 
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                        <input class="form-control" id="floatingBaseTen" type="text" value="10# 171" aria-label="Disabled input example" disabled readonly>
-                                        <label for="floatingBaseTen">Base 10 (Decimal)</label>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card bg-light border border-0">
-                                    <form class="form-floating">
-                                        <input class="form-control" id="floatingBaseS" type="text" value="16# 00AB" aria-label="Disabled input example" disabled readonly>
-                                        <label for="floatingBaseS">Base 16 (16#)(0x)</label>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>                            
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card bg-light border-0">
-                            <div class="col">
-                                <div class="card border border-4 box bg-light rounded">
-                                    <div class="card-body d-flex flex-column">
-                                        <div class="d-flex flex-row justify-content-between">
-                                            <h6 class="card-title p-2 text-center">Decimal to Binary Conversion</h6>
-                                        </div>
-                                        <button id="stepButton" class="btn btn-outline-dark" style="width: 75%; align-self: center;">Step / Replay</button>
-                                        <div id="outputBin" class="text-center fw-bold">
-
-                                        </div>
-                                        <div class="card-text" id="conversionSteps">
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4">
-                    <div class="col">
-
-                    <div class="card border border-5 bg-light rounded">
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex flex-row justify-content-between">
-                                <h6 class="card-title p-2 text-center">Binary to Decimal Conversion</h6>
-                            </div>
-                            <button id="secStepButton" class="btn btn-outline-dark"style="width: 75%; align-self: center;">Step / Replay</button>
-                            <div id="outputDec" class="text-center fw-bold">
-                            </div>
-                            <div class="card-text" id="secConversionSteps">
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                            </div>
-                        </div> 
-                    </div>
-                    </div>                    
-                </div>
-            </div>
-            
-        </div>
-        </section>
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
 
         <script src="index.js"></script>
