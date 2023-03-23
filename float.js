@@ -40,7 +40,7 @@ function floatConvert() {
           scien = parseFloat(base2).toExponential();
       }
 
-      // document.getElementById("base2").innerHTML = base2;
+      document.getElementById("base2").innerHTML = base2;
       var temp = document.querySelectorAll("#base2");
       // if (base2.length <= 16) {
       //   temp[0].innerHTML = format(base2);
@@ -120,6 +120,7 @@ function floatConvert() {
         for(let i = 0; i < temp.length; i++) {
           temp[i].innerHTML = bin16;
         }
+        document.getElementById("out16").value = bin16;
       }
 
       // Binary 32
@@ -148,6 +149,7 @@ function floatConvert() {
         for(let i = 0; i < temp.length; i++) {
           temp[i].innerHTML = bin32;
         }
+        document.getElementById("out32").value = bin32;
       }
 
 
@@ -237,6 +239,8 @@ function floatConvert() {
           temp[i].style.color = "red";
           temp[i].innerHTML = "ERROR";
         }
+        document.getElementById("out16").value = "ERROR";
+        document.getElementById("out16").style.color = "red";
       }
 
       // handling error for IEE32
@@ -249,6 +253,8 @@ function floatConvert() {
           temp[i].style.color = "red";
           temp[i].innerHTML = "ERROR";
         }
+        document.getElementById("out32").value = "ERROR";
+        document.getElementById("out32").style.color = "red";
       }
 
       function setDeafult() {
@@ -259,6 +265,9 @@ function floatConvert() {
           for(let i = 0; i < temp.length; i++) {
             temp[i].style.color = "black";
           }    
+
+          document.getElementById("out16").style.color = "black";
+          document.getElementById("out32").style.color = "black";
           
           document.getElementById("check32").style.color = "black";
           document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
@@ -268,12 +277,6 @@ function floatConvert() {
           }
       }
 
-      // function limit16() {
-      //   document.querySelectorAll("#base2")[0].innerHTML = "limit exceeded";
-      // }
-      // function limit32() {
-      //   document.querySelectorAll("#base2")[1].innerHTML = "limit exceeded";
-      // }
       function limit() {
         temp = document.querySelectorAll("#base2");
         for (let i = 0; i < temp.length; i++) {
