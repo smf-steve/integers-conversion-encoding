@@ -2,7 +2,7 @@ function floatConvert() {
     setDeafult();
     // getting input value 
     var inVal = document.getElementById("inp").value;
-    var base2 = "", scien = "", base;
+    var base2 = "", scien = "", tempOutputs = "";
     var baseVal = inVal.substr(0, inVal.indexOf('#')+1);
     inVal = inVal.substr(inVal.indexOf('#')+1);
 
@@ -42,8 +42,21 @@ function floatConvert() {
 
       // document.getElementById("base2").innerHTML = base2;
       var temp = document.querySelectorAll("#base2");
-      for (let i = 0; i < temp.length; i++) {
-        temp[i].innerHTML = base2;
+      // if (base2.length <= 16) {
+      //   temp[0].innerHTML = format(base2);
+      // }
+      // else if (base2.length <= 32) {
+      //   temp[1].innerHTML = format(base2);
+      //   limit16();
+      // }
+      // else limit16(), limit32();
+      if (base2.length > 32) {
+        limit();
+      }
+      else {
+        for (let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = format(base2);
+        }
       }
 
       // converting into conventional scientific notation. 
@@ -63,12 +76,18 @@ function floatConvert() {
       var sign;
       if (negStat) sign = 1;
       else sign = 0;
+      temp = document.querySelectorAll("#sign");
+      for (let i = 0; i < temp.length; i++) {
+        temp[i].innerHTML = sign;
+      }
+      // document.getElementById("signOutput16").innerHTML = sign + " | x xxxx | xxxx xxxx xx";
 
       // writing the exponents 
       var temp = document.querySelectorAll("#exp");
       for (let i = 0; i < temp.length; i++) {
         temp[i].innerHTML = exp;
       }
+
       // BINARY 16
       var output, bias16, bin16 = ""; 
       bias16 = (15 + parseInt(exp));
@@ -77,12 +96,18 @@ function floatConvert() {
           temp[i].innerHTML = bias16;
       }
       bias16 = bias16.toString(2);
+      tempOutputs = formatBias(bias16, "16");
       var tmp = document.querySelectorAll("#biasBase2");
       for (let i = 0; i < tmp.length; i++) {
-        tmp[i].innerHTML = formatBias(bias16, "16");
+        tmp[i].innerHTML = tempOutputs;
       }
+      // document.getElementById("expOutput16").innerHTML = "x | " + tempOutputs + " | xxxx xxxx xx";
+
 
       document.getElementById("bias16size").innerHTML = bias16.length;
+      tempOutputs = format(mantissa(base2).substr(0,10));
+      // document.getElementById("mantissa16").innerHTML = tempOutputs;
+      // document.getElementById("manOut16").innerHTML = "x | x xxxx | " + tempOutputs;
      if (bias16.length > 5 || exp < -14) {
         error16();
       } 
@@ -90,7 +115,7 @@ function floatConvert() {
         document.getElementById("check16").innerHTML = "FITS";
         bin16 += sign + ' | ';
         bin16 += formatBias(bias16, "16") + ' | ';
-        bin16 += format(mantissa(base2).substr(0,10));
+        bin16 += tempOutputs;
         temp = document.querySelectorAll("#B16");
         for(let i = 0; i < temp.length; i++) {
           temp[i].innerHTML = bin16;
@@ -156,19 +181,6 @@ function floatConvert() {
           }
           outputVal += outputFloat;
         }
-          
-        // if (decVal != "" || floatVal != "") {
-       
-
-        //   // if (floatVal.charAt(0) == 0) {
-        //   //   while (floatVal.charAt(i) == 0) {
-        //   //     counter++;
-        //   //     i++;
-        //   //   }
-        //   // } 
-        // }
-        
-        
         return outputVal;
       }
   
@@ -214,6 +226,12 @@ function floatConvert() {
         document.getElementById("check16").innerHTML = "ERROR";
         document.getElementById("check16").style.color = "red";
         document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "red";
+        // document.getElementById("signOutput16").innerHTML = "ERROR";
+        // document.getElementById("signOutput16").style.color = "red";
+        // document.getElementById("expOutput16").innerHTML = "ERROR";
+        // document.getElementById("expOutput16").style.color = "red";
+        // document.getElementById("manOut16").innerHTML = "ERROR";
+        // document.getElementById("manOut16").style.color = "red";
         temp = document.querySelectorAll("#B16");
         for(let i = 0; i < temp.length; i++) {
           temp[i].style.color = "red";
@@ -240,6 +258,26 @@ function floatConvert() {
           temp = document.querySelectorAll("#B16");
           for(let i = 0; i < temp.length; i++) {
             temp[i].style.color = "black";
-        }       
+          }    
+          
+          document.getElementById("check32").style.color = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
+          temp = document.querySelectorAll("#B32");
+          for(let i = 0; i < temp.length; i++) {
+            temp[i].style.color = "black";
+          }
+      }
+
+      // function limit16() {
+      //   document.querySelectorAll("#base2")[0].innerHTML = "limit exceeded";
+      // }
+      // function limit32() {
+      //   document.querySelectorAll("#base2")[1].innerHTML = "limit exceeded";
+      // }
+      function limit() {
+        temp = document.querySelectorAll("#base2");
+        for (let i = 0; i < temp.length; i++) {
+          temp[i].innerHTML = "limit exceeded";
+        }
       }
 }

@@ -124,7 +124,7 @@
                                 <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="biasBase2">0 0110</span> = <span id="bias16size"> 5 </span> bits, <span id="check16">FITS</span></p>
                                 <p class="mb-0 bold">Step 6: Fill in the blanks</p>
                                 <p class="mb-0">&emsp;&emsp;Binary16: s | e eeee | mmmm mmmm mm *</p>
-                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
+                                    <!-- <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
                                     <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 31 digits. (&lt;&lt; 31) </p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput16">0 | x xxxx | xxxx xxxx xx</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0 0110</span></p>
@@ -132,8 +132,8 @@
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput16">1 | 0 0110 | xxxx xxxx xx</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa16">1111 0101 10</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 9 digits. (&gt;&gt; 9) </p>
-                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="manOut16">1 | 0 0110 | 1111 0101 10</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer:</u><span id="B16"> 1 | 0 0110 | 1111 0101 10</span></p>
+                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="manOut16">1 | 0 0110 | 1111 0101 10</span></p> -->
+                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B16"> 1 | 0 0110 | 1111 0101 10</span></p>
                                 <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
                                 <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit in the space available, precision is lost.</p>
                             </div>
@@ -162,16 +162,16 @@
                                 <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="binaryBias32">0 0110</span> = <span id="bias32size"> 5 </span> bits, <span id="check32">FITS</span></p>
                                 <p class="mb-0 bold">Step 6: Fill in the blanks</p>
                                 <p class="mb-0">&emsp;&emsp;Binary32: s | e eeee | mmmm mmmm mm *</p>
-                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
+                                    <!-- <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
                                     <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 31 digits. (&lt;&lt; 31) </p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput32">0 | xxxx xxxx | xxxx xxxx xxxx xxxx xxxx xx</span></p>
-                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0111 0110</span></p>
+                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="binaryBias32">0111 0110</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 23 digits. (&lt;&lt; 23) </p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput32">1 | 0111 0110 | xxxx xxxx xxxx xxxx xxxx xx</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa32">1111 0101 10</span></p>
                                     <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 9 digits. (&gt;&gt; 9) </p>
-                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="manOut32">1 | 0111 0110 | 1111 0101 1001 1100 0000 00<</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer:</u><span id="B32"> 1 | 0 0110 | 1111 0101 10</span></p>
+                                    <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="manOut32">1 | 0111 0110 | 1111 0101 1001 1100 0000 00<</span></p> -->
+                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B32"> 1 | 0 0110 | 1111 0101 10</span></p>
                                 <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
                                 <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit in the space available, precision is lost.</p>
                             </div>
