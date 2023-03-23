@@ -285,3 +285,7 @@
 .no-border {
   border: 0;
 }
+
+.brd-clr-grey {
+  border-color: #eaecef;
+}
