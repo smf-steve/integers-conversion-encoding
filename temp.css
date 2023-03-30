@@ -1,0 +1,521 @@
+:root {
+    --background-gradient: linear-gradient(to bottom, #111 0%, #222 100%);
+    --box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1),
+        inset 0 0 40px rgba(255, 255, 255, 0.05),
+        inset 0 0 60px rgba(255, 255, 255, 0.01);
+}
+
+html {
+    scroll-padding-top: calc(4.5rem - 1px);
+}
+
+
+/* Base styles */
+
+/* Styles for small devices */
+@media only screen and (min-width: 0px) {
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        width: 100vw;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    body {
+        /* display: flex; */
+        /* box-sizing: border-box; */
+        /* justify-content: center;
+        align-items: center; */
+        background: var(--background-gradient) !important;
+        box-shadow: var(--box-shadow) !important;
+        color: #fff !important;
+        background-repeat: no-repeat;
+        background-size: cover !important;
+        position: relative;
+        padding-bottom: 3%;
+
+        /*overflow: hidden; */
+    }
+
+
+    #mainNav {
+        min-height: 3.5rem;
+        /* background: var(--background-gradient);
+        box-shadow: var(--box-shadow);     */
+        background: var(--background-gradient) !important;
+    }
+
+    #mainNav .navbar-toggler {
+        font-size: 80%;
+        padding: 0.75rem;
+        color: #1e90ff;
+        border: 1px solid #1e90ff;
+    }
+
+    #mainNav .navbar-toggler:focus {
+        outline: none;
+    }
+
+    #mainNav .navbar-brand {
+        color: #ffffff;
+        font-weight: 700;
+        padding: 0.9rem 0;
+    }
+
+    #mainNav .navbar-nav .nav-item:hover {
+        color: fade(#fff, 80%);
+        outline: none;
+        background-color: transparent;
+    }
+
+    #mainNav .navbar-nav .nav-item:active,
+    #mainNav .navbar-nav .nav-item:focus {
+        outline: none;
+        background-color: transparent;
+    }
+
+    #mainNav .navbar-nav li a {
+        color: #fff !important;
+    }
+
+
+    .container {
+        /* background: var(--background-gradient);
+        box-shadow: var(--box-shadow);  */
+        font-family: 'Space Grotesk', sans-serif;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .masthead {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* height: 100vh; */
+    }
+
+    #bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    canvas {
+        max-width: 100%;
+    }
+
+    .masthead .btn {
+        align-self: center;
+        background-color: #0011ff00;
+        border: 2px solid #fff;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+        margin-top: 50%;
+    }
+
+    .containerTemp {
+        position: relative;
+    }
+
+    .title {
+        color: #fff;
+        font-size: 3rem;
+        /* line-height:0.8!important; */
+    }
+
+    .section {
+        padding-top: 3%;
+        margin-top: 15% !important;
+    }
+
+    .form-control {
+        color: #fff !important;
+    }
+
+    .form-control:focus {
+        background: transparent !important;
+    }
+
+    .input input {
+        font-size: inherit;
+        margin-bottom: 5%;
+        background-color: inherit;
+    }
+
+    .nav-tabs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .nav-tabs .nav-link {
+        /* flex: 0 0 auto !important; */
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .nav-tabs .nav-link span {
+        display: block;
+    }
+
+    .nav-link.active {
+        color: #fff !important;
+        background: var(--background-gradient) !important;
+    }
+
+    .box-nav .nav-link {
+        border-width: 2px 0 0 0;
+        /* border-style: solid;
+        border-color: white; */
+    }
+
+    .four-box {
+        width: 90% !important;
+    }
+
+    .card {
+        background: transparent !important;
+    }
+
+    .card .form-control {
+        background-color: #2a2927c4 !important;
+    }
+
+    .card button:active {
+        background: transparent !important;
+        ;
+    }
+
+    .step-wise {
+        width: 90% !important;
+    }
+
+    .step {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+
+    .step span {
+        flex: 1;
+    }
+
+    .step span:first-of-type {
+        text-align: right;
+        padding-right: 5px;
+    }
+
+    .step span:last-of-type {
+        text-align: left;
+        padding-left: 5px;
+    }
+
+    .btn-group-toggle .btn.active {
+        background: transparent;
+        color: #fff;
+    }
+
+    input[type=radio] {
+        display: none;
+    }
+
+    .help:focus,
+    .help:active,
+    .help:hover {
+        background-color: transparent !important;
+        color: inherit !important;
+        border-color: transparent !important;
+    }
+
+    button.help {
+        padding-right: 2rem;
+        border: none;
+        width: 16px;
+        height: 16px;
+    }
+
+    .modal-content {
+        background: var(--background-gradient) !important;
+    }
+
+    .encodings .form-control {
+        background-color: #2a2927c4 !important;
+    }
+
+    .encodings {
+        width: 47% !important;
+    }
+
+    .bin-strings .form-control {
+        background-color: #2a2927c4 !important;
+    }
+
+    .bin-strings {
+        width: 20% !important;
+    }
+
+    .arrow {
+        font-size: 2rem;
+        width: 10% !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important
+    }
+
+    .col-margins {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 5% !important;
+    }
+
+    .arrow2 {
+        position: absolute;
+        top: 52% !important;
+        font-size: 2rem;
+    }
+
+    .arrow3 {
+        position: absolute;
+        top: 72% !important;
+        font-size: 2rem;
+    }
+
+    .form-range::-webkit-slider-runnable-track {
+        background-color: #2a2927c4 !important;
+        border: 1px solid #c6c6c6 !important;
+    }
+
+
+}
+
+/* Styles for medium devices */
+@media only screen and (min-width: 576px) {
+
+    /* Customize scrollbar */
+    /* width and color can be adjusted */
+    /* WebKit based browsers */
+    ::-webkit-scrollbar {
+        width: 7px;
+        /* width of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        /* background of the track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: blue;
+        /* color of the thumb */
+        border-radius: 5px;
+        /* roundness of the thumb */
+        height: 1px;
+    }
+
+    /* Firefox */
+    ::-moz-scrollbar {
+        width: 7px;
+    }
+
+    ::-moz-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-moz-scrollbar-thumb {
+        background-color: blue;
+        border-radius: 5px;
+    }
+
+    .masthead .btn {
+        margin-top: 27%;
+    }
+
+    .input-box .d-flex {
+        display: block !important;
+        width: 50%;
+    }
+
+    .section {
+        padding-top: 3%;
+        margin-top: 3% !important;
+    }
+
+    .nav-tabs .nav-link span {
+        display: inline;
+    }
+
+    .binary-encoding .row {
+        display: flex !important;
+    }
+
+    .be-boxes {
+        width: 70% !important;
+    }
+
+    .bin-str {
+        width: 70% !important;
+    }
+
+}
+
+/* Styles for large devices */
+@media only screen and (min-width: 992px) {
+    .masthead .btn {
+        margin-top: 20%;
+    }
+
+    .section {
+        margin-top: 0 !important;
+    }
+
+    .input-box .d-flex {
+        width: 30%;
+    }
+
+    .four-box {
+        width: 30% !important;
+        padding-right: 0 !important;
+        border-right: 0 !important;
+    }
+
+    .dec-encode .mx-auto {
+        margin-left: 2% !important;
+        margin-right: 1% !important;
+    }
+
+    .dtb,
+    .btd {
+        padding-right: 2% !important;
+        padding-left: 0 !important;
+        border-right: 1% !important;
+        border-left: 0 !important;
+    }
+
+    .step-wise {
+        width: 30% !important;
+    }
+
+    .nav-tabs .nav-link span {
+        display: inline;
+    }
+
+    #mainNav {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        background-color: transparent!important;
+        transition: background-color 0.3s ease-in-out !important;
+    }
+
+    #mainNav .navbar-brand {
+        padding: 0.5rem 0;
+        color: rgba(255, 255, 255, 0.5)!important;
+    }
+
+    #mainNav .navbar-brand:hover{
+        color:#fff!important;
+    }
+
+    #mainNav .nav-link {
+        transition: none;
+        padding: 2rem 1.5rem;
+        color: rgba(255, 255, 255, 0.5)!important;
+        /* border:1px solid #fff; */
+    }
+
+    #mainNav .nav-link:hover {
+        color: rgba(255, 255, 255, 0.75)!important;
+    }
+
+    #mainNav .nav-link:active {
+        color: #fff!important;
+    }
+
+    #mainNav.navbar-shrink {
+        background-color: #fff!important;
+    }
+
+    #mainNav.navbar-shrink .navbar-brand {
+        color: #000!important;
+    }
+
+    #mainNav.navbar-shrink .nav-link {
+        color: #000!important;
+        padding: 1.5rem 1.5rem 1.25rem;
+        border-bottom: 0.25rem solid transparent!important;
+    }
+
+    #mainNav.navbar-shrink .nav-link:hover {
+        color: #1e90ff;
+    }
+
+    #mainNav.navbar-shrink .nav-link:active {
+        color: #467370;
+    }
+
+    #mainNav.navbar-shrink .nav-link.active {
+        color: #1e90ff;
+        outline: none;
+        border-bottom: 0.25rem solid #1e90ff;
+    }
+
+    /* Customize scrollbar */
+    /* width and color can be adjusted */
+    /* WebKit based browsers */
+    ::-webkit-scrollbar {
+        width: 7px;
+        /* width of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        /* background of the track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: blue;
+        /* color of the thumb */
+        border-radius: 5px;
+        /* roundness of the thumb */
+        height: 1px;
+    }
+
+    /* Firefox */
+    ::-moz-scrollbar {
+        width: 7px;
+    }
+
+    ::-moz-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-moz-scrollbar-thumb {
+        background-color: blue;
+        border-radius: 5px;
+    }
+
+}
+
+/* https://stackoverflow.com/questions/52277523/setcustomvalidity-position-changes-when-input-width-increase */
+/* #floatingInputVal:invalid {
+     background-color: #ffdddd; 
+} */
+
+/* body {
+    margin: 0;
+    min-height: 100%;
+    background-color: #2a2927!important;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #fff;
+  } */
+/* body {
+  background-color: #2a2927!important;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.01) 0%,rgba(255,255,255,0.1) 50%,rgba(255,255,255,0.3) 100%)!important;
+} */

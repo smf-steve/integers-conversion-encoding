@@ -1,85 +1,167 @@
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-const scene = new THREE.Scene();
+// const scene = new THREE.Scene();
+// const canvas = document.querySelector('#bg');
+// const body = document.querySelector('body');
+// const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+// const renderer = new THREE.WebGLRenderer({
+//   canvas,
+// });
 
-const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
+// camera.aspect = window.innerWidth / window.innerHeight;
+// camera.updateProjectionMatrix();
+// renderer.setSize(window.innerWidth, window.innerHeight);
+
+// // body.style.width = window.innerWidth + 'px';
+// // body.style.height = window.innerHeight + 'px';
+// window.addEventListener('resize', () => {
+//     const canvasWidth = canvas.clientWidth;
+//     camera.aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
+//     renderer.setSize(window.innerWidth, window.innerHeight);
+// //     canvas.width = window.innerWidth;
+// // canvas.height = window.innerHeight;
+// // body.style.width = window.innerWidth + 'px';
+// // body.style.height = window.innerHeight + 'px';
+// console.log(window.innerWidth + ", " + window.innerHeight);
+//     if (window.innerWidth < 600) {
+//        // camera.position.setZ(30);
+//         camera.position.setX(-17);
+//       //  camera.position.setY(8);
+//       } else {
+//         camera.position.setZ(30);
+//         camera.position.setX(-30);
+//         camera.position.setY(10);
+//       }
+//   });
+
+// renderer.setClearColor(0x000000, 0);
+
+
+// renderer.setPixelRatio(window.devicePixelRatio);
+// //renderer.setSize(canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+
+// camera.position.setZ(30);
+// camera.position.setX(-25);
+// camera.position.setY(8);
+
+// renderer.render(scene, camera);
+
+// const worldTexture = new THREE.TextureLoader().load('img/binary-world.jpg');
+
+// const world = new THREE.Mesh(
+//   new THREE.SphereGeometry(15, 32, 32),
+//   new THREE.MeshBasicMaterial({
+//     map: worldTexture,
+//   })
+// );
+
+// scene.add(world);
+
+// const pointLight = new THREE.PointLight(0xffffff);
+// pointLight.position.set(5, 5, 5);
+
+// const ambientLight = new THREE.AmbientLight(0xffffff);
+// scene.add(pointLight, ambientLight);
+
+// // Helpers
+
+// // const lightHelper = new THREE.PointLightHelper(pointLight)
+// // const gridHelper = new THREE.GridHelper(200, 50);
+// // scene.add(lightHelper, gridHelper)
+// const colors = [
+//     new THREE.Color(1, 0, 0),   // red
+//     new THREE.Color(1, 0.5, 0), // orange
+//     new THREE.Color(1, 1, 0),   // yellow
+//     new THREE.Color(0, 1, 0),   // green
+//     new THREE.Color(0, 0, 1),   // blue
+//     new THREE.Color(0.5, 0, 1), // indigo
+//     new THREE.Color(1, 0, 1),   // violet
+//   ];
+  
+//   const originalColor = new THREE.Color(1, 1, 1); // white
+//   const duration = 10; // 10 seconds
+//   let time = 0;
+//   let delta = 0;
+//   const clock = new THREE.Clock();
+  
+// // Animation Loop
+// world.rotation.z = 0.5;
+// function animate() {
+//   requestAnimationFrame(animate);
+//     // Update color
+//     const t = (time % duration) / duration; // normalize time between 0 and 1
+//     const index1 = Math.floor(t * colors.length);
+//     const index2 = (index1 + 1) % colors.length;
+//     const color1 = colors[index1];
+//     const color2 = colors[index2];
+//     const mixAmount = (t * colors.length) % 1;
+//     const currentColor = new THREE.Color().lerpColors(color1, color2, mixAmount);
+  
+//     world.material.color = currentColor;
+  
+//     time += delta;
+  
+//     // reset animation
+//     if (time >= duration) {
+//       time = 0;
+//     }
+//     delta = clock.getDelta();
+
+//   world.rotation.y += 0.005;
+//   //world.rotation.z += 0.001;
+//   renderer.render(scene, camera);
+// }
+  
+
+// animate();
+// Get the buttons and bits text element
+const btn8 = document.getElementById("btn-8");
+const btn16 = document.getElementById("btn-16");
+const btn32 = document.getElementById("btn-32");
+const bitsText = document.querySelector(".bits-text");
+
+// Add click event listeners to the buttons
+btn8.addEventListener("click", function() {
+  toggleActiveBtn(btn8);
+  bitsText.textContent = "8 Bits";
+});
+btn16.addEventListener("click", function() {
+  toggleActiveBtn(btn16);
+  bitsText.textContent = "16 Bits";
+});
+btn32.addEventListener("click", function() {
+  toggleActiveBtn(btn32);
+  bitsText.textContent = "32 Bits";
 });
 
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.visualViewport.width, 700);
-// window.onload = function(){
-//     if(window.visualViewport.width > 400){
-//         camera.position.setZ(-100);
-//     }
-// }
-changeSize = function() { 
-    renderer.setSize(window.visualViewport.width, 700); 
-    if(window.visualViewport.width > 400){
-        camera.position.setZ(-100);
-        // camera.position.Z(100)
-    }
+// Function to toggle the active class on the buttons
+function toggleActiveBtn(btn) {
+  btn.classList.add("active");
+  const otherBtns = document.querySelectorAll(".btn-group-toggle .btn:not(#" + btn.id + ")");
+  otherBtns.forEach(function(otherBtn) {
+    otherBtn.classList.remove("active");
+  });
 }
-window.addEventListener("resize", changeSize);
-camera.position.setZ(30);
-camera.position.setX(-25);
-camera.position.setY(8);
-
-renderer.render(scene, camera);
-
-const worldTexture = new THREE.TextureLoader().load('img/binary-world.jpg');
-
-const world = new THREE.Mesh(
-  new THREE.SphereGeometry(15, 32, 32),
-  new THREE.MeshBasicMaterial({
-    map: worldTexture
-  })
-);
-
-scene.add(world);
-
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5, 5, 5);
-
-const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add(pointLight, ambientLight);
-
-// Helpers
-
-// const lightHelper = new THREE.PointLightHelper(pointLight)
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper)
-
-// Animation Loop
-world.rotation.z = 0.5;
-function animate() {
-  requestAnimationFrame(animate);
-  world.rotation.y += 0.005;
-  //world.rotation.z += 0.001;
-  renderer.render(scene, camera);
-}
-
-animate();
 
 // DOMContentLoaded means when DOM objects are loaded, function() will be invoked
-document.addEventListener("DOMContentLoaded", function() {
-   // console.log(window.visualViewport.width);
-    var text = "Integer Conversion and Encoding";
-    function typeText(text, i){
-        if(i < text.length){
-            document.querySelector('#head').innerHTML = text.substring(0, i+1) 
-            + '<span aria-hidden="true"></span>';
-            setTimeout(function() {
-                typeText(text, i + 1)
-            }, 130);
-        }else{
-            setTimeout(function(){}, 200);
-        }
-    }
-    typeText(text, 0);
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//    // console.log(window.visualViewport.width);
+//     var text = "Integer Conversion and Encoding";
+//     function typeText(text, i){
+//         if(i < text.length){
+//             document.querySelector('#head').innerHTML = text.substring(0, i+1) 
+//             + '<span aria-hidden="true"></span>';
+//             setTimeout(function() {
+//                 typeText(text, i + 1)
+//             }, 130);
+//         }else{
+//             setTimeout(function(){}, 200);
+//         }
+//     }
+//     typeText(text, 0);
+// });
 
 let fractional;
 let precision = 15; // how many times to convert fractional bit
