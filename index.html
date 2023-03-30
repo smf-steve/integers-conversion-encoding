@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-        <title> Integer Conversion Encoding </title>
-        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=0.9">
-		<meta name="description" content="An academic tool used to Convert and Encode Integers (of various bases).">
-		<meta name="author" content="Victoria Miteva, and others">
-		<meta name="keywords" content="convert, encode, integers, binary">
-		<link href="style1.css" rel="stylesheet" type="text/css"/>
 
-        <!-- 7-segement display -->
-        <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
-        
-        <!-- Big Int for Large Binary Strings -->
-        <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title> Integer Conversion Encoding </title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=0.9">
+    <meta name="description" content="An academic tool used to Convert and Encode Integers (of various bases).">
+    <meta name="author" content="Victoria Miteva, and others">
+    <meta name="keywords" content="convert, encode, integers, binary">
+    <link href="temp.css" rel="stylesheet" type="text/css" />
 
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />       
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-        <!-- Three.js CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js" crossorigin="anonymous"></script>
-      
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- 7-segement display -->
+    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
 
-        <script>
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <script>
+
         window.addEventListener('DOMContentLoaded', event => {
-        
-            // Navbar shrink function
-            var navbarShrink = function () {
+
+            // Navbar shrink and highlight function
+            var navbarShrink = function (highlightTab) {
                 const navbarCollapsible = document.body.querySelector('#mainNav');
                 if (!navbarCollapsible) {
                     return;
@@ -41,68 +48,271 @@
                 } else {
                     navbarCollapsible.classList.add('navbar-shrink')
                 }
-        
+                // Highlight the tab with the given ID
+                const tabLink = document.querySelector(`#navbarResponsive a[href="#${highlightTab}"]`);
+                const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
+                tabLinks.forEach(link => link.classList.remove('active'));
+                if (tabLink) {
+                    tabLink.classList.add('active');
+                }
             };
-        
-            // Shrink the navbar 
-            navbarShrink();
-        
-            // Shrink the navbar when page is scrolled
-            document.addEventListener('scroll', navbarShrink);
-        
-            // Activate Bootstrap scrollspy on the main nav element
-            const mainNav = document.body.querySelector('#mainNav');
-            if (mainNav) {
-                new bootstrap.ScrollSpy(document.body, {
-                    target: '#mainNav',
-                    offset: 74,
-                });
-            };
-        
-            // Collapse responsive navbar when toggler is visible
-            const navbarToggler = document.body.querySelector('.navbar-toggler');
-            const responsiveNavItems = [].slice.call(
-                document.querySelectorAll('#navbarResponsive .nav-link')
-            );
-            responsiveNavItems.map(function (responsiveNavItem) {
-                responsiveNavItem.addEventListener('click', () => {
-                    if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                        navbarToggler.click();
-                    }
+
+            // Shrink and highlight the navbar when page is loaded
+            navbarShrink('nav-home');
+
+            // Shrink and highlight the navbar when a tab is clicked
+            const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', event => {
+                    event.preventDefault();
+                    const highlightTab = event.target.getAttribute('href').slice(1);
+                    navbarShrink(highlightTab);
                 });
             });
-        
+
         });
-        </script>        
-	</head>
-    <body id="page-top" style="background-color: #2a2927!important;">
-        <!-- Nav bar -->   
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">Homepage</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Conversion Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="integer-conversion.html">Integer Conversion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="conversion-sheets.html">More Resources</a></li>
-                    </ul>
-                </div>
+
+    </script>
+</head>
+
+<body id="page-top">
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Homepage</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Conversion Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="secondtemp.html">Integer Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conversion-sheets.html">More Resources</a></li>
+                </ul>
             </div>
-        </nav>             
-        <!-- Masthead-->
-        <header class="masthead">         
-                        <canvas id="bg"></canvas>
-                        <div class="mx-auto my-0 text-uppercase" id="head"></div>
-                        <a class="btn btn-outline-light" href="integer-conversion.html">To Conversion</a>
-        </header>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <canvas id="bg"></canvas>
+        <a class="btn btn-outline-light btn-lg mb-5" href="secondtemp.html">To Conversion</a>
+        <div class="containerTemp">
+            <div class="text-left">
+                <h1 class="text-uppercase title"></h1>
+            </div>
+        </div>
 
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
+    </header>
+</body>
 
-        <script src="index.js"></script>
-        
-    </body>
+<!-- <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer> -->
+
+<script src="index.js"></script>
+<script>
+    const scene = new THREE.Scene();
+    const canvas = document.querySelector('#bg');
+    const body = document.querySelector('body');
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas,
+    });
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // body.style.width = window.innerWidth + 'px';
+    // body.style.height = window.innerHeight + 'px';
+    window.addEventListener('resize', () => {
+        const canvasWidth = canvas.clientWidth;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        //     canvas.width = window.innerWidth;
+        // canvas.height = window.innerHeight;
+        // body.style.width = window.innerWidth + 'px';
+        // body.style.height = window.innerHeight + 'px';
+        console.log(window.innerWidth + ", " + window.innerHeight);
+        if (window.innerWidth < 600) {
+            // camera.position.setZ(30);
+            camera.position.setX(-17);
+            //  camera.position.setY(8);
+        } else {
+            camera.position.setZ(30);
+            camera.position.setX(-30);
+            camera.position.setY(10);
+        }
+    });
+
+    renderer.setClearColor(0x000000, 0);
+
+
+    renderer.setPixelRatio(window.devicePixelRatio);
+    //renderer.setSize(canvas.getBoundingClientRect().width, canvas.getBoundingClientRect().height);
+
+    camera.position.setZ(30);
+    camera.position.setX(-25);
+    camera.position.setY(8);
+
+    renderer.render(scene, camera);
+
+    const worldTexture = new THREE.TextureLoader().load('img/binary-world.jpg');
+
+    const world = new THREE.Mesh(
+        new THREE.SphereGeometry(15, 32, 32),
+        new THREE.MeshBasicMaterial({
+            map: worldTexture,
+        })
+    );
+
+    scene.add(world);
+
+    const pointLight = new THREE.PointLight(0xffffff);
+    pointLight.position.set(5, 5, 5);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff);
+    scene.add(pointLight, ambientLight);
+
+    // Helpers
+
+    // const lightHelper = new THREE.PointLightHelper(pointLight)
+    // const gridHelper = new THREE.GridHelper(200, 50);
+    // scene.add(lightHelper, gridHelper)
+    const colors = [
+        new THREE.Color(1, 0, 0),   // red
+        new THREE.Color(1, 0.5, 0), // orange
+        new THREE.Color(1, 1, 0),   // yellow
+        new THREE.Color(0, 1, 0),   // green
+        new THREE.Color(0, 0, 1),   // blue
+        new THREE.Color(0.5, 0, 1), // indigo
+        new THREE.Color(1, 0, 1),   // violet
+    ];
+
+    const originalColor = new THREE.Color(1, 1, 1); // white
+    const duration = 10; // 10 seconds
+    let time = 0;
+    let delta = 0;
+    const clock = new THREE.Clock();
+
+    // Animation Loop
+    world.rotation.z = 0.5;
+    function animate() {
+        requestAnimationFrame(animate);
+        // Update color
+        const t = (time % duration) / duration; // normalize time between 0 and 1
+        const index1 = Math.floor(t * colors.length);
+        const index2 = (index1 + 1) % colors.length;
+        const color1 = colors[index1];
+        const color2 = colors[index2];
+        const mixAmount = (t * colors.length) % 1;
+        const currentColor = new THREE.Color().lerpColors(color1, color2, mixAmount);
+
+        world.material.color = currentColor;
+
+        time += delta;
+
+        // reset animation
+        if (time >= duration) {
+            time = 0;
+        }
+        delta = clock.getDelta();
+
+        world.rotation.y += 0.005;
+        //world.rotation.z += 0.001;
+        renderer.render(scene, camera);
+    }
+
+
+    animate();
+    class TextScramble {
+        constructor(el) {
+            this.el = el
+            this.chars = '01001001 01101110 01110100 01100101 01100111 01100101 01110010_'
+        }
+
+        setText(newText) {
+            const phrases = newText.split(' ')
+            const combinedText = phrases.join(' ')
+            const oldText = this.el.innerHTML
+            const length = combinedText.length
+            const queue = []
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || ''
+                const to = combinedText[i] || ''
+                const start = Math.floor(Math.random() * 40)
+                const end = start + Math.floor(Math.random() * 40)
+                queue.push({ from, to, start, end })
+            }
+            this.queue = queue
+            this.frame = 0
+            this.update()
+        }
+
+        update() {
+            let output = ''
+            let complete = 0
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i]
+                if (this.frame >= end) {
+                    complete++
+                    output += to
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar()
+                        this.queue[i].char = char
+                    }
+                    output += `<span class="dud">${char}</span>`
+                } else {
+                    output += from
+                }
+            }
+            this.el.innerHTML = output
+            if (complete !== this.queue.length) {
+                setTimeout(() => {
+                    requestAnimationFrame(this.update.bind(this))
+                    this.frame++
+                }, 30) // increase the delay time for slower animation
+            } else {
+                this.addLineBreaks();
+            }
+        }
+
+        //     addLineBreaks() {
+        //   const words = this.el.innerHTML.split(' ');
+        //   this.el.innerHTML = words.join('<span class="break"></span>');
+        //   const breaks = this.el.querySelectorAll('.break');
+        //   breaks.forEach((br) => {
+        //     br.style.display = 'inline-block';
+        //     br.style.width = '0';
+        //     br.style.height = '0';
+        //     br.style.overflow = 'hidden';
+        //     br.style.marginTop = '-0.5em';
+        //     br.style.transition = 'width 2s ease, height 1.5s ease, margin-top 0.5s ease';
+        //     setTimeout(() => {
+        //       br.style.width = '100%';
+        //       br.style.lineheight = '0.5em';
+        //       br.style.marginTop = '0';
+        //     }, 1000);
+        //   });
+        // }
+
+
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)]
+        }
+    }
+
+    const el = document.querySelector('.title')
+    const fx = new TextScramble(el)
+
+    const text = 'integer conversion and encoding'
+    fx.setText(text)
+
+
+</script>
+
 </html>
