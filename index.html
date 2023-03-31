@@ -35,42 +35,42 @@
 
     <script>
 
-        window.addEventListener('DOMContentLoaded', event => {
+        // window.addEventListener('DOMContentLoaded', event => {
 
-            // Navbar shrink and highlight function
-            var navbarShrink = function (highlightTab) {
-                const navbarCollapsible = document.body.querySelector('#mainNav');
-                if (!navbarCollapsible) {
-                    return;
-                }
-                if (window.scrollY === 0) {
-                    navbarCollapsible.classList.remove('navbar-shrink')
-                } else {
-                    navbarCollapsible.classList.add('navbar-shrink')
-                }
-                // Highlight the tab with the given ID
-                const tabLink = document.querySelector(`#navbarResponsive a[href="#${highlightTab}"]`);
-                const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
-                tabLinks.forEach(link => link.classList.remove('active'));
-                if (tabLink) {
-                    tabLink.classList.add('active');
-                }
-            };
+        //     // Navbar shrink and highlight function
+        //     var navbarShrink = function (highlightTab) {
+        //         const navbarCollapsible = document.body.querySelector('#mainNav');
+        //         if (!navbarCollapsible) {
+        //             return;
+        //         }
+        //         if (window.scrollY === 0) {
+        //             navbarCollapsible.classList.remove('navbar-shrink')
+        //         } else {
+        //             navbarCollapsible.classList.add('navbar-shrink')
+        //         }
+        //         // Highlight the tab with the given ID
+        //         const tabLink = document.querySelector(`#navbarResponsive a[href="#${highlightTab}"]`);
+        //         const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
+        //         tabLinks.forEach(link => link.classList.remove('active'));
+        //         if (tabLink) {
+        //             tabLink.classList.add('active');
+        //         }
+        //     };
 
-            // Shrink and highlight the navbar when page is loaded
-            navbarShrink('nav-home');
+        //     // Shrink and highlight the navbar when page is loaded
+        //     navbarShrink('nav-home');
 
-            // Shrink and highlight the navbar when a tab is clicked
-            const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
-            tabLinks.forEach(link => {
-                link.addEventListener('click', event => {
-                    event.preventDefault();
-                    const highlightTab = event.target.getAttribute('href').slice(1);
-                    navbarShrink(highlightTab);
-                });
-            });
+        //     // Shrink and highlight the navbar when a tab is clicked
+        //     const tabLinks = document.querySelectorAll('#navbarResponsive .nav-link');
+        //     tabLinks.forEach(link => {
+        //         link.addEventListener('click', event => {
+        //             event.preventDefault();
+        //             const highlightTab = event.target.getAttribute('href').slice(1);
+        //             navbarShrink(highlightTab);
+        //         });
+        //     });
 
-        });
+        // });
 
     </script>
 </head>
@@ -88,7 +88,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="secondtemp.html">Integer Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="integer-conversion.html">Integer Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="conversion-sheets.html">More Resources</a></li>
                 </ul>
@@ -98,7 +98,7 @@
     <!-- Masthead-->
     <header class="masthead">
         <canvas id="bg"></canvas>
-        <a class="btn btn-outline-light btn-lg mb-5" href="secondtemp.html">To Conversion</a>
+        <a class="btn btn-outline-light btn-lg mb-5" href="integer-conversion.html">To Conversion</a>
         <div class="containerTemp">
             <div class="text-left">
                 <h1 class="text-uppercase title"></h1>

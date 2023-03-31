@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-        <title> Integer Conversion Encoding </title>
-        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=0.9">
-		<meta name="description" content="An academic tool used to Convert and Encode Integers (of various bases).">
-		<meta name="author" content="Victoria Miteva, and others">
-		<meta name="keywords" content="convert, encode, integers, binary">
-		<link href="fpstyle.css" rel="stylesheet" type="text/css"/>
 
-        <!-- 7-segement display -->
-        <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
-                
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />       
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-        <!-- Three.js CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js" crossorigin="anonymous"></script>
-        <script>
+<head>
+    <meta charset="UTF-8">
+    <title> Integer Conversion Encoding </title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=0.9">
+    <meta name="description" content="An academic tool used to Convert and Encode Integers (of various bases).">
+    <meta name="author" content="Victoria Miteva, and others">
+    <meta name="keywords" content="convert, encode, integers, binary">
+    <link href="fpstyle.css" rel="stylesheet" type="text/css" />
+
+    <!-- 7-segement display -->
+    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js" crossorigin="anonymous"></script>
+    <script>
         window.addEventListener('DOMContentLoaded', event => {
-        
+
             // Navbar shrink function
             var navbarShrink = function () {
                 const navbarCollapsible = document.body.querySelector('#mainNav');
@@ -35,15 +41,15 @@
                 } else {
                     navbarCollapsible.classList.add('navbar-shrink')
                 }
-        
+
             };
-        
+
             // Shrink the navbar 
             navbarShrink();
-        
+
             // Shrink the navbar when page is scrolled
             document.addEventListener('scroll', navbarShrink);
-        
+
             // Activate Bootstrap scrollspy on the main nav element
             const mainNav = document.body.querySelector('#mainNav');
             if (mainNav) {
@@ -52,7 +58,7 @@
                     offset: 74,
                 });
             };
-        
+
             // Collapse responsive navbar when toggler is visible
             const navbarToggler = document.body.querySelector('.navbar-toggler');
             const responsiveNavItems = [].slice.call(
@@ -65,131 +71,173 @@
                     }
                 });
             });
-        
+
         });
-        </script>    
-	</head>
-    <body class="bg-light" id="page-top">
-        <!-- Nav bar -->   
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html#page-top">Homepage</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Conversion Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="integer-conversion.html">Integer Conversion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="conversion-sheets.html">More Resources</a></li>
-                    </ul>
+    </script>
+</head>
+
+<body id="page-top">
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="index.html#page-top">Homepage</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Conversion Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="integer-conversion.html">Integer Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="floating-points.html#float">Float Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="conversion-sheets.html#sheets">More Resources</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="container mt-5 pt-4">
+            <div class="text-center">
+                <h3 class="mb-4 text-underline"><b>Float Conversion</b></h3>
+            </div>
+
+            <form class="input" onsubmit="return false">
+                <div class="form-floating mb-3 mt-4 ml-auto gx-1">
+                    <input type="text" id="inp" class="form-control" placeholder="16# - 0.00FACE" value="16# - 0.00FACE"
+                        oninput="floatConvert()">
+                    <label for="floatingInputVal">Input a number</label>
+                </div>
+            </form>
+
+            <div class="row gap-5 mt-2 mb-5">
+                <div class="col-sm">
+                    <div class="form-floating mb-3 mt-3 ml-auto gx-1">
+                        <input type="text" id="out16" class="form-control" placeholder="1 | 0 0110 | 1111 0101 10"
+                            value="1 | 0 0110 | 1111 0101 10" aria-label="Disabled input example" disabled readonly>
+                        <label for="floatingInputVal">IEEE Binary-16</label>
+                    </div>
+                    <div class="mt-4">
+                        <p class="step-wise mb-1"><strong>STEP-WISE PROCESS</strong></p>
+                    </div>
+                    <div class="container border-weight pt-2 px-2 lineheight" id="hi">
+                        <div class="step-wise">
+                            <p class="mb-0 bold">Step 1: Convert to Base 2</p>
+                            <p class="mb-0">&emsp;&emsp;2# <span id="base2">0000 . 0000 0000 1111 1010 1100 1110</span>
+                            </p>
+                            <p class="mb-0 bold">Step 2: Rewrite in Scientific Notation</p>
+                            <p class="mb-0">&emsp;&emsp;<span id="scien2">-1.1111 0101 1001 11 x 2^ - 1001 (-9) </span>
+                            </p>
+                            <p class="mb-0 bold">Step 3: Add bias to the exponent</p>
+                            <p class="mb-0">&emsp;&emsp;Binary16: Bias = 15</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="exp">-9</span> + 15 = <span
+                                    id="bias16">6</span></p>
+                            <p class="mb-0 bold">Step 4: Convert new exponent value to binary</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="bias16">6</span> = 2# <span
+                                    id="biasBase2">0 0110</span></p>
+                            <p class="mb-0 bold">Step 5: Check to see if the encoded exponent value fits into space
+                                available. If it doesn't fit, answer = "error"</p>
+                            <p class="mb-0">&emsp;&emsp;Binary16: Space = 5 bits</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="biasBase2">0 0110</span> = <span
+                                    id="bias16size"> 5 </span> bits, <span id="check16">FITS</span></p>
+                            <p class="mb-0 bold">Step 6: Fill in the blanks</p>
+                            <p class="mb-0">&emsp;&emsp;Binary16: s | e eeee | mmmm mmmm mm *</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
+                            <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 15 digits. (&lt;&lt; 15)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput16">0 | x
+                                    xxxx | xxxx xxxx xx</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0 0110</span>
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 10 digits. (&lt;&lt; 10)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput16">1 | 0
+                                    0110 | xxxx xxxx xx</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa16">1111 0101
+                                    10</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 7 digits. (&gt;&gt; 7)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Final Output: <span id="B16">1 | 0 0110
+                                    | 1111 0101 10</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B16"> 1 | 0 0110 | 1111
+                                    0101 10</span></p>
+                            <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
+                            <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit
+                                in the space available, precision is lost.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-floating mb-3 mt-3 ml-auto gx-1">
+                        <input type="text" id="out32" class="form-control"
+                            placeholder="1 | 0111 0110 | 1111 0101 1001 1100 0000 00"
+                            value="1 | 0111 0110 | 1111 0101 1001 1100 0000 00" aria-label="Disabled input example"
+                            disabled readonly>
+                        <label for="floatingInputVal">IEEE Binary-32</label>
+                    </div>
+                    <div class="mt-4">
+                        <p class="step-wise mb-1"><strong>STEP-WISE PROCESS</strong></p>
+                    </div>
+                    <div class="container border-weight pt-2 px-2 lineheight rounded">
+                        <div class="step-wise">
+                            <p class="mb-0 bold">Step 1: Convert to Base 2</p>
+                            <p class="mb-0">&emsp;&emsp;2# <span id="base2">0000 . 0000 0000 1111 1010 1100 1110</span>
+                            </p>
+                            <p class="mb-0 bold">Step 2: Rewrite in Scientific Notation</p>
+                            <p class="mb-0">&emsp;&emsp;<span id="scien2">-1.1111 0101 1001 11 x 2^ - 1001 (-9) </span>
+                            </p>
+                            <p class="mb-0 bold">Step 3: Add bias to the exponent</p>
+                            <p class="mb-0">&emsp;&emsp;Binary32: Bias = 127</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="exp">-9</span> + 127 = <span
+                                    id="bias32">118</span></p>
+                            <p class="mb-0 bold">Step 4: Convert new exponent value to binary</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="bias32">118</span> = 2# <span
+                                    id="binaryBias32">0111 0110</span></p>
+                            <p class="mb-0 bold">Step 5: Check to see if the encoded exponent value fits into space
+                                available. If it doesn't fit, answer = "error"</p>
+                            <p class="mb-0">&emsp;&emsp;Binary32: Space = 8 bits</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="binaryBias32">0111 0110</span> = <span
+                                    id="bias32size"> 8 </span> bits, <span id="check32">FITS</span></p>
+                            <p class="mb-0 bold">Step 6: Fill in the blanks</p>
+
+                            <p class="mb-0">&emsp;&emsp;Binary32: s | eeee eeee | mmmm mmmm mmmm mmmm mmmm mmm *</p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 1 </span> </p>
+                            <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 31 digits. (&lt;&lt; 31)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput32">1 | xxxx
+                                    xxxx | xxxx xxxx xxxx xxxx xxxx xxx</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0111
+                                    0110</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 23 digits. (&lt;&lt; 23)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput32">1 | 0111
+                                    0110 | xxxx xxxx xx</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa32">1111 0101
+                                    1001 1100 0000 000</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 9 digits. (&gt;&gt; 9)
+                            </p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Final Output: <span id="B32">1 | 0111
+                                    0110 | 1111 0101 1001 1100 0000 000</span></p>
+                            <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B32"> 1 | 0111 0110 | 1111
+                                    0101 1001 1100 0000 000</span></p>
+
+                            <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
+                            <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit
+                                in the space available, precision is lost.</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </nav> 
-        
-        <section>
-        <div class="container bg-light mt-5 pt-4">
-                <div class="text-center">
-                    <h3 class="mb-4 text-underline"><b>Float Conversion</b></h3>
-                </div>
+        </div>
+    </section>
 
-                <form class="input" onsubmit="return false">
-                    <div class="form-floating mb-3 mt-4 ml-auto gx-1">
-                        <input type="text" id="inp" class="form-control bg-light" placeholder="16# - 0.00FACE" value="16# - 0.00FACE" oninput="floatConvert()">
-                        <label for="floatingInputVal">Input a number</label>
-                    </div>
-                </form>
+    <script src="float.js"></script>
 
-                <div class="row gap-5 mt-2 mb-5">
-                    <div class="col-sm">
-                        <div class="form-floating mb-3 mt-3 ml-auto gx-1 bg-light">
-                            <input type="text" id="out16" class="form-control" placeholder="1 | 0 0110 | 1111 0101 10" value="1 | 0 0110 | 1111 0101 10" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingInputVal">IEEE Binary-16</label>
-                        </div>
-                        <div class="mt-4">
-                            <p class="step-wise mb-1"><strong>STEP-WISE PROCESS</strong></p>
-                        </div>
-                        <div class="container border-weight pt-2 px-2 lineheight" id="hi">
-                            <div class="step-wise">
-                                <p class="mb-0 bold">Step 1: Convert to Base 2</p>
-                                <p class="mb-0">&emsp;&emsp;2# <span id="base2">0000 . 0000 0000 1111 1010 1100 1110</span></p>
-                                <p class="mb-0 bold">Step 2: Rewrite in Scientific Notation</p>
-                                <p class="mb-0">&emsp;&emsp;<span id="scien2">-1.1111 0101 1001 11 x 2^ - 1001 (-9) </span></p>
-                                <p class="mb-0 bold">Step 3: Add bias to the exponent</p>
-                                <p class="mb-0">&emsp;&emsp;Binary16: Bias = 15</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="exp">-9</span> + 15 = <span id="bias16">6</span></p>
-                                <p class="mb-0 bold">Step 4: Convert new exponent value to binary</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="bias16">6</span> = 2# <span id="biasBase2">0 0110</span></p>
-                                <p class="mb-0 bold">Step 5: Check to see if the encoded exponent value fits into space available. If it doesn't fit, answer = "error"</p>
-                                <p class="mb-0">&emsp;&emsp;Binary16: Space = 5 bits</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="biasBase2">0 0110</span> = <span id="bias16size"> 5 </span> bits, <span id="check16">FITS</span></p>
-                                <p class="mb-0 bold">Step 6: Fill in the blanks</p>
-                                <p class="mb-0">&emsp;&emsp;Binary16: s | e eeee | mmmm mmmm mm *</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 0 </span> </p>
-                                <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 15 digits. (&lt;&lt; 15) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput16">0 | x xxxx | xxxx xxxx xx</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0 0110</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 10 digits. (&lt;&lt; 10) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput16">1 | 0 0110 | xxxx xxxx xx</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa16">1111 0101 10</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 7 digits. (&gt;&gt; 7) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Final Output: <span id="B16">1 | 0 0110 | 1111 0101 10</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B16"> 1 | 0 0110 | 1111 0101 10</span></p>
-                                <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
-                                <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit in the space available, precision is lost.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="form-floating mb-3 mt-3 ml-auto gx-1 bg-light">
-                            <input type="text" id="out32" class="form-control" placeholder="1 | 0111 0110 | 1111 0101 1001 1100 0000 00" value="1 | 0111 0110 | 1111 0101 1001 1100 0000 00" aria-label="Disabled input example" disabled readonly>
-                            <label for="floatingInputVal">IEEE Binary-32</label>
-                        </div>
-                        <div class="mt-4">
-                            <p class="step-wise mb-1"><strong>STEP-WISE PROCESS</strong></p>
-                        </div>
-                        <div class="container border-weight pt-2 px-2 lineheight rounded">
-                            <div class="step-wise">
-                                <p class="mb-0 bold">Step 1: Convert to Base 2</p>
-                                <p class="mb-0">&emsp;&emsp;2# <span id="base2">0000 . 0000 0000 1111 1010 1100 1110</span></p>
-                                <p class="mb-0 bold">Step 2: Rewrite in Scientific Notation</p>
-                                <p class="mb-0">&emsp;&emsp;<span id="scien2">-1.1111 0101 1001 11 x 2^ - 1001 (-9) </span></p>
-                                <p class="mb-0 bold">Step 3: Add bias to the exponent</p>
-                                <p class="mb-0">&emsp;&emsp;Binary32: Bias = 127</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="exp">-9</span> + 127 = <span id="bias32">118</span></p>
-                                <p class="mb-0 bold">Step 4: Convert new exponent value to binary</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="bias32">118</span> = 2# <span id="binaryBias32">0111 0110</span></p>
-                                <p class="mb-0 bold">Step 5: Check to see if the encoded exponent value fits into space available. If it doesn't fit, answer = "error"</p>
-                                <p class="mb-0">&emsp;&emsp;Binary32: Space = 8 bits</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<span id="binaryBias32">0111 0110</span> = <span id="bias32size"> 8 </span> bits, <span id="check32">FITS</span></p>
-                                <p class="mb-0 bold">Step 6: Fill in the blanks</p>
+    <!-- <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
+         -->
+</body>
 
-                                <p class="mb-0">&emsp;&emsp;Binary32: s | eeee eeee | mmmm mmmm mmmm mmmm mmmm mmm *</p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>SIGN:</u><span id="sign"> 1 </span> </p>
-                                <P class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 31 digits. (&lt;&lt; 31) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="signOutput32">1 | xxxx xxxx | xxxx xxxx xxxx xxxx xxxx xxx</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>EXPONENT:</u> <span id="biasBase2">0111 0110</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift left by 23 digits. (&lt;&lt; 23) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Output: <span id="expOutput32">1 | 0111 0110 | xxxx xxxx xx</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>MANTISSA:</u> <span id="mantissa32">1111 0101 1001 1100 0000 000</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Shift right by 9 digits. (&gt;&gt; 9) </p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Final Output: <span id="B32">1 | 0111 0110 | 1111 0101 1001 1100 0000 000</span></p>
-                                <p class="mb-0">&emsp;&emsp;&emsp;&emsp;<u>Answer: </u><span id="B32"> 1 | 0111 0110 | 1111 0101 1001 1100 0000 000</span></p>
-
-                                <p class="mb-0"><br>&emsp;&emsp;*s = sign, e = exponent, m = mantissa</p>
-                                <p class="mb-0">&emsp;&emsp;<strong>Note</strong> that if the mantissa is too large to fit in the space available, precision is lost.</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-
-        <script src="float.js"></script>
-
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; <img src="img/partyparrot.gif" alt="Party Parrot" style="margin-bottom: 15px;width:28px;height:28px"> 2022</div></footer>
-        
-    </body>
 </html>
