@@ -258,22 +258,22 @@ function floatConvert() {
       }
 
       function setDeafult() {
-          document.getElementById("check16").style.color = "black";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "black";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
+          document.getElementById("check16").style.color = "white";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "white";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "white";
           temp = document.querySelectorAll("#B16");
           for(let i = 0; i < temp.length; i++) {
-            temp[i].style.color = "black";
+            temp[i].style.color = "white";
           }    
 
-          document.getElementById("out16").style.color = "black";
-          document.getElementById("out32").style.color = "black";
+          document.getElementById("out16").style.color = "white";
+          document.getElementById("out32").style.color = "white";
           
-          document.getElementById("check32").style.color = "black";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
+          document.getElementById("check32").style.color = "white";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "white";
           temp = document.querySelectorAll("#B32");
           for(let i = 0; i < temp.length; i++) {
-            temp[i].style.color = "black";
+            temp[i].style.color = "white";
           }
       }
 
