@@ -138,7 +138,7 @@ function convert() {
       break;
   }
   decimalValue = decVal;
-  console.log(decimalValue + ", " + decVal);
+  //console.log(decimalValue + ", " + decVal);
   binaryValue = decimalToBinary(decimalValue);
   element = document.getElementById("conversionSteps");
   binaryVal = binaryStr; // set your binary value here
@@ -163,9 +163,9 @@ function validInput(decimalVal, base) {
   // Store the prefixes and converted values in arrays
   const prefixes = ["2#", "10#", "8#", "16#"];
   const values = [
-    format2(decimalVal.toString(2), base),
+    format2(Number(decimalVal).toString(2), base),
     decimalVal.toString(10),
-    format8(decimalVal.toString(8)),
+    format8(Number(decimalVal).toString(8)),
     format16(BigInt(decimalVal).toString(16))
   ];
   for (let i = 0; i < prefixes.length; i++) {
