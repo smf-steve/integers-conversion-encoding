@@ -39,11 +39,11 @@ function floatConvert() {
           base2 = parseFloat(inVal).toString(2); 
           scien = parseFloat(base2).toExponential();
       }
-
-      document.getElementById("base2").innerHTML = base2;
+      // document.getElementById("base2").innerHTML = base2;
       var temp = document.querySelectorAll("#base2");
       // if (base2.length <= 16) {
       //   temp[0].innerHTML = format(base2);
+      //   temp[1].innerHTML = format(base2);
       // }
       // else if (base2.length <= 32) {
       //   temp[1].innerHTML = format(base2);
@@ -156,6 +156,7 @@ function floatConvert() {
     function baseConvert(inputVal, base) {   
       inputVal = inputVal.replace(" ", '');
         var outputVal = "", outputFloat = "", i = 0, counter=0, decVal, floatVal;
+        
         if (inputVal != "") {
           if (inputVal.indexOf('.') == -1) {
             decVal = inputVal;
@@ -174,14 +175,32 @@ function floatConvert() {
                   }
             }
           }
-
           outputVal += parseInt(decVal, base).toString(2);
           outputVal += '.';
           outputVal += '0'.repeat(4*counter); 
           for (let i = counter; i < floatVal.length; i++) {
             outputFloat += format(parseInt(floatVal.charAt(i), base).toString(2));
           }
-          outputVal += outputFloat;
+          // outputVal += outputFloat;
+          // outputVal += format8(outputFloat);
+          // switch (base) {            
+          //   case 8:
+          //     alert(format8(outputFloat));
+          //     outputVal += format8(outputFloat);
+          //     break;
+    
+          //   case 16:
+          //     outputVal += format(outputFloat);
+          //     break; 
+    
+          //   default: 
+          //     outputVal += format(outputFloat);
+          //     break; 
+          // }
+          if (base == 8) {
+            outputVal += format8(outputFloat);
+          }
+          else outputVal += outputFloat;
         }
         return outputVal;
       }
@@ -197,6 +216,16 @@ function floatConvert() {
       }
   
       // breaking into 4 chunks 
+      // function format(strBase2) {
+      //   // return strBase2.match(/.{1,4}/g).join(' ');
+      //   var formattedStr = "";
+      //   var zeroes = Math.ceil(strBase2.length / 4) * 4 - strBase2.length;
+
+      //   formattedStr += '0'.repeat(zeroes) + strBase2;      
+      //   formattedStr = formattedStr.match(/.{1,4}/g).join(' ');
+      
+      //   return formattedStr.toUpperCase();
+      // }
       function format(strBase2) {
         return strBase2.match(/.{1,4}/g).join(' ');
       }
@@ -221,6 +250,20 @@ function floatConvert() {
             break;
         }
         return res; 
+      }
+
+      // handling the formating for the fractional  part in conversion of the bases
+      function format8(strBase8) {
+        var formattedStr = "";
+        if (strBase8.length <= 3) {
+          formattedStr += '0'.repeat(3 - strBase8.length) + strBase8;
+        }
+        else {
+          var zeroes = Math.ceil(strBase8.length / 3) * 3 - strBase8.length;
+          formattedStr += '0'.repeat(zeroes) + strBase8;
+        }
+        formattedStr = formattedStr.match(/.{1,3}/g).join(' ');
+        return formattedStr.toUpperCase();
       }
 
       // handling error for IEEE16
@@ -258,22 +301,22 @@ function floatConvert() {
       }
 
       function setDeafult() {
-          document.getElementById("check16").style.color = "white";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "white";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "white";
+          document.getElementById("check16").style.color = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[0].style.borderColor = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
           temp = document.querySelectorAll("#B16");
           for(let i = 0; i < temp.length; i++) {
-            temp[i].style.color = "white";
+            temp[i].style.color = "black";
           }    
 
-          document.getElementById("out16").style.color = "white";
-          document.getElementById("out32").style.color = "white";
+          document.getElementById("out16").style.color = "black";
+          document.getElementById("out32").style.color = "black";
           
-          document.getElementById("check32").style.color = "white";
-          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "white";
+          document.getElementById("check32").style.color = "black";
+          document.getElementsByClassName("container border-weight pt-2 px-2 lineheight")[1].style.borderColor = "black";
           temp = document.querySelectorAll("#B32");
           for(let i = 0; i < temp.length; i++) {
-            temp[i].style.color = "white";
+            temp[i].style.color = "black";
           }
       }
 
